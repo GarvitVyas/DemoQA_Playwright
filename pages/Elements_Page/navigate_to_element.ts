@@ -3,10 +3,12 @@ import { Page } from "playwright/test";
 class Element{
     private elementPage : string;
     private textboxpage:string;
+    private checkboxPage:string;
     private page:Page;
     constructor(page:Page){
         this.page = page;
         this.textboxpage='.menu-list>#item-0';
+        this.checkboxPage='.menu-list>#item-1'
         this.elementPage = '.category-cards>div:nth-child(1)';
 
     }
@@ -30,7 +32,16 @@ class Element{
         }
 
         const pageurl = await this.page.url();
-        pageurl.includes('text-box')!=true?console.log('Navigation to text box page unsuccessfull'):console.log('Navigation to text box page, successfull');
+       pageurl.includes('text-box')!=true?console.log('Navigation to text box page unsuccessfull'):console.log('Navigation to text box page, successfull'); 
+    }
+    
+    async navigateToCheckBox(){
+        const checkboxPage = await this.page.waitForSelector(this.checkboxPage);
+        if(checkboxPage){
+            await this.page.locator(this.checkboxPage,{hasText:'Check Box'}).click();
+        }else{
+            throw new Error('Navigation to check box page, unsuccessfull!');
+        }
         
     }
 
