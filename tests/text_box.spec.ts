@@ -15,7 +15,7 @@ test.describe('Text Box tests',()=>{
         throw error;
       }
     })
-
+    
     test('Navigate to text box page',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToTextBox();
@@ -32,12 +32,5 @@ test.describe('Text Box tests',()=>{
         expect(email).not.toBeEmpty();
         const emailregex=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         expect(filledEmail).toMatch(emailregex);
-
-
-        
-
-
     })
-
-
 })
