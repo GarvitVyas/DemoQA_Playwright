@@ -1,0 +1,8 @@
+Navigation to Elements home page, successfull!
+Navigation to text box page, successfull
+Promise {
+  <pending>,
+  [Symbol(async_id_symbol)]: 47456,
+  [Symbol(trigger_async_id_symbol)]: 39843,
+  [Symbol(kResourceStore)]: undefined
+}
