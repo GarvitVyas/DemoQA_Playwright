@@ -1,0 +1,20 @@
+{
+  "name": "project_demoqa",
+  "version": "1.0.0",
+  "description": "This is project to apply playwright learning with typescript language to create a framework for UI automation.",
+  "main": "index.js",
+  "scripts": {},
+  "author": "GArvit_Vyas",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "playwright": "^1.49.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.6",
+    "allure-commandline": "^2.32.0",
+    "allure-playwright": "^3.0.8",
+    "typescript": "^5.7.3"
+  }
+}
