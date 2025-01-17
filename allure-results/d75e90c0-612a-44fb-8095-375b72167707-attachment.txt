@@ -1,0 +1,35 @@
+Error in before each hook page.goto: Timeout 60000ms exceeded.
+Call log:
+  - navigating to "https://demoqa.com/", waiting until "load"
+
+    at /home/garvit/Desktop/playwright_practice_ts/project_demoqa/tests/text_box.spec.ts:12:20 {
+  name: 'TimeoutError',
+  [Symbol(step)]: {
+    stepId: 'pw:api@9',
+    location: {
+      file: '/home/garvit/Desktop/playwright_practice_ts/project_demoqa/tests/text_box.spec.ts',
+      line: 12,
+      column: 20,
+      function: undefined
+    },
+    category: 'pw:api',
+    title: 'page.goto(/)',
+    apiName: 'page.goto',
+    params: { url: '/', waitUntil: 'load' },
+    boxedStack: undefined,
+    steps: [],
+    complete: [Function: complete],
+    endWallTime: 1737090207875,
+    error: {
+      message: 'TimeoutError: page.goto: Timeout 60000ms exceeded.\n' +
+        'Call log:\n' +
+        '\x1B[2m  - navigating to "https://demoqa.com/", waiting until "load"\x1B[22m\n',
+      stack: 'TimeoutError: page.goto: Timeout 60000ms exceeded.\n' +
+        'Call log:\n' +
+        '\x1B[2m  - navigating to "https://demoqa.com/", waiting until "load"\x1B[22m\n' +
+        '\n' +
+        '    at /home/garvit/Desktop/playwright_practice_ts/project_demoqa/tests/text_box.spec.ts:12:20',
+      cause: undefined
+    }
+  }
+}

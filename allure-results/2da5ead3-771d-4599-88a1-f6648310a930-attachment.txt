@@ -1,0 +1,2 @@
+Navigation to Elements home page, successfull!
+Navigation to text box page, successfull
