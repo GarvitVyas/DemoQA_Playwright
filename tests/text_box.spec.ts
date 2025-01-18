@@ -69,4 +69,26 @@ test.describe('Text Box tests',()=>{
         expect(resultWindow).toContainText(data['current-address']);
         expect(resultWindow).toContainText(data['permanent-address']);
       })
+
+      test('Navigate to test box page and verify result on empty fields',async({})=>{
+
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToTextBox();
+
+        await textboxPage.actionSubmit();
+        const result = await textboxPage.verifyResult();
+        expect(result).not.toBeVisible();
+
+      })
+
+      test('verify email field when user enter email invalid format',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToTextBox();
+
+        await textboxPage.fillWrongEmail();
+        await textboxPage.actionSubmit();
+        const email = await textboxPage.verifyWrongEmailField();
+        expect(email).toBe('rgb(255, 0, 0)')
+
+      })
 })

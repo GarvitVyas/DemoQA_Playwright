@@ -4,7 +4,7 @@
   "description": "This is project to apply playwright learning with typescript language to create a framework for UI automation.",
   "main": "index.js",
   "scripts": {},
-  "author": "GArvit_Vyas",
+  "author": "Garvit_Vyas",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.7",

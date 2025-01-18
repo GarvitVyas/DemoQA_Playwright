@@ -1,6 +1,6 @@
 import { Page } from "playwright/test";
 import { data } from "../../data/data";
-import { callbackify } from "util";
+
 
 class TextBox{
     private page:Page;
@@ -34,6 +34,18 @@ class TextBox{
     async fillEmail():Promise<string>{
         await this.page.locator(this.email).fill(data['email']);
         return await this.page.locator(this.email).inputValue();
+    }
+    async fillWrongEmail(){
+        await this.page.locator(this.email).fill(data['wrong-email']);
+    }
+    async verifyWrongEmailField(){
+        const emailfield = await this.page.locator(this.email);
+        const border = await emailfield.evaluate((ele)=>{
+            const style = window.getComputedStyle(ele);
+            return style.border;
+        })
+        const parts = border.split(' ').slice(2).join(' ');
+        return parts;
     }
 
     async verifyCurrentAddress(){
