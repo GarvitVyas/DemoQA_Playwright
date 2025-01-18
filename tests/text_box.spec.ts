@@ -2,7 +2,8 @@ import {test,expect} from '@playwright/test';
 import {Element} from '../pages/Elements_Page/navigate_to_element';
 import { TextBox } from '../pages/Elements_Page/TextBoxPage/textBox_Page';
 import {data} from '../pages/data/data';
-import { text } from 'stream/consumers';
+
+
 
 test.describe('Text Box tests',()=>{
     let elementPage:Element;
@@ -81,7 +82,7 @@ test.describe('Text Box tests',()=>{
 
       })
 
-      test('verify email field when user enter email invalid format',async({})=>{
+      test.only('verify email field when user enter email invalid format',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToTextBox();
 

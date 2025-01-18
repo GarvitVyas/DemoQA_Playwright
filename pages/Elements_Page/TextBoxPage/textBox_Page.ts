@@ -1,5 +1,6 @@
 import { Page } from "playwright/test";
 import { data } from "../../data/data";
+import { TIMEOUT } from "dns";
 
 
 class TextBox{
@@ -38,14 +39,15 @@ class TextBox{
     async fillWrongEmail(){
         await this.page.locator(this.email).fill(data['wrong-email']);
     }
-    async verifyWrongEmailField(){
+
+    async verifyWrongEmailField():Promise<string>{
+        await this.page.waitForTimeout(500);
         const emailfield = await this.page.locator(this.email);
         const border = await emailfield.evaluate((ele)=>{
             const style = window.getComputedStyle(ele);
-            return style.border;
+            return style.borderColor;
         })
-        const parts = border.split(' ').slice(2).join(' ');
-        return parts;
+        return border;
     }
 
     async verifyCurrentAddress(){
