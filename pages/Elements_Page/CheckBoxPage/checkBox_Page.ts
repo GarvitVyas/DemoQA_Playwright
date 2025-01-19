@@ -14,10 +14,12 @@ class CheckBox{
     private cbNames:string;
     private cbCheckBoxes:string;
     private cbParentAll:string;
+    private resultBox:string;
     
     constructor(page:Page){
         this.page = page;
         this.elementActions = new ElementActions();
+        this.resultBox='div#result>span';
         this.cbCheckBoxes='[for*="tree-node"] .rct-checkbox svg';
         this.cbNames='//label[contains(@for,"tree-node")]/span[3]';
         this.expandAll='Expand all';
@@ -76,6 +78,19 @@ class CheckBox{
 
     async uncheckCheckBox(ele:number){
         await this.elementActions.uncheckCheckBox(await this.page.locator(this.cbParentAll).nth(ele));
+    }
+    async verifyResultBoxVisible(){
+        return await this.elementActions.visibilityCheck(await this.page.locator(this.resultBox).nth(1));
+    }
+    async verifyResultContent(){
+        const results = await this.page.locator(this.resultBox);
+        const count = await results.count()
+        let arrayResult:string[]=[];
+        for(let i=1; i<count ; i++){
+            let temp = await results.nth(i).innerText();
+            arrayResult.push(temp)
+        }
+        return arrayResult
     }
 }
 

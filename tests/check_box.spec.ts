@@ -65,4 +65,23 @@ test.describe('Tests for check box functionality',()=>{
             await checkboxPage.uncheckCheckBox(14);
             expect(await checkboxPage.verifyCheckBoxChecked(0)).toContain('uncheck'); 
         })
+
+        test.only('verify the selected items are shown in result window',async({})=>{
+            await elementPage.navigateToElementPage();
+            await elementPage.navigateToCheckBox();
+            //verify initially home is uncheck
+            expect(await checkboxPage.verifyCheckBoxChecked(0)).toContain('uncheck');
+            //expand all
+            await checkboxPage.expandList();
+            expect(await checkboxPage.verifyResultBoxVisible()).toBeFalsy();
+            //check the Downloads
+            await checkboxPage.checkCheckBox(14);
+            expect(await checkboxPage.verifyCheckBoxChecked(15)).toContain('check');
+            //verify the names in the result box 
+            expect(await checkboxPage.verifyResultBoxVisible()).toBeTruthy();
+            const content = await checkboxPage.verifyResultContent();
+            expect(content).toEqual(['downloads','wordFile','excelFile']);
+
+        })
+
 })
