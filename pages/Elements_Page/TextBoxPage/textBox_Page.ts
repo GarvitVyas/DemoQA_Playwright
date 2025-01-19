@@ -1,6 +1,5 @@
 import { Page } from "playwright/test";
 import { data } from "../../data/data";
-import { TIMEOUT } from "dns";
 
 
 class TextBox{

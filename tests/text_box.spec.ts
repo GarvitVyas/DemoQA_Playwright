@@ -82,7 +82,7 @@ test.describe('Text Box tests',()=>{
 
       })
 
-      test.only('verify email field when user enter email invalid format',async({})=>{
+      test('verify email field when user enter email invalid format',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToTextBox();
 
