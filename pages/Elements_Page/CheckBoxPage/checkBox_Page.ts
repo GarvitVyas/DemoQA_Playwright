@@ -11,21 +11,29 @@ class CheckBox{
     private fileDoc:string;
     private expandAll:string;
     private collapseAll:string;
+    private cbNames:string;
+    private cbCheckBoxes:string;
+    private cbParentAll:string;
+    
     constructor(page:Page){
         this.page = page;
         this.elementActions = new ElementActions();
+        this.cbCheckBoxes='[for*="tree-node"] .rct-checkbox svg';
+        this.cbNames='//label[contains(@for,"tree-node")]/span[3]';
         this.expandAll='Expand all';
         this.fileDoc='//label[@for="tree-node-excelFile"]'
         this.homeParent='//label[@for="tree-node-home"]';
         this.homeCheckBox='//input[@id="tree-node-home"]';
         this.homeExpandBtn='#tree-node>ol>li>span>button';
         this.collapseAll='Collapse all';
+        this.cbParentAll='[for*="tree-node"]'
+        
     }
 
     async verifyCheckBoxPage(){
         return await this.page.url();
     }
-
+ 
     async actionHomeExpand(){
         await this.elementActions.clickElement(await this.page.locator(this.homeExpandBtn));
     }
@@ -56,6 +64,18 @@ class CheckBox{
 
     async collapseList(){
         await this.elementActions.clickElement(await this.page.getByTitle(this.collapseAll));
+    }
+    
+    async verifyCheckBoxChecked(ele:number){
+       return await this.elementActions.verifyChecked(await this.page.locator(this.cbCheckBoxes).nth(ele))
+    }
+
+    async checkCheckBox(ele:number){
+        await this.elementActions.clickCheckBox(await this.page.locator(this.cbParentAll).nth(ele))
+    }
+
+    async uncheckCheckBox(ele:number){
+        await this.elementActions.uncheckCheckBox(await this.page.locator(this.cbParentAll).nth(ele));
     }
 }
 

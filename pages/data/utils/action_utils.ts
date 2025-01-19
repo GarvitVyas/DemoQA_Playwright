@@ -10,7 +10,7 @@ class ElementActions{
     async clickCheckBox(locator:Locator){
         await locator.check();
     }
-    
+
     async uncheckCheckBox(locator:Locator){
         await locator.uncheck();
     }
@@ -19,6 +19,10 @@ class ElementActions{
         
          const ele = await locator.isVisible();
          if(ele){return true}else{return false;}
+    }
+
+    async verifyChecked(locator:Locator){
+        return await locator.getAttribute('class');
     }
 
 }
