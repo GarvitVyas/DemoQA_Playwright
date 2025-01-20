@@ -4,13 +4,14 @@ class Element{
     private elementPage : string;
     private textboxpage:string;
     private checkboxPage:string;
+    private radiobuttonPage:string;
     private page:Page;
     constructor(page:Page){
         this.page = page;
         this.textboxpage='.menu-list>#item-0';
         this.checkboxPage='.menu-list>#item-1'
         this.elementPage = '.category-cards>div:nth-child(1)';
-
+        this.radiobuttonPage='.menu-list>#item-2'
     }
 
     async navigateToElementPage(){
@@ -39,10 +40,20 @@ class Element{
         const checkboxPage = await this.page.waitForSelector(this.checkboxPage);
         if(checkboxPage){
             await this.page.locator(this.checkboxPage,{hasText:'Check Box'}).click();
+            console.log('Navigation to check Box page,successfull');
         }else{
             throw new Error('Navigation to check box page, unsuccessfull!');
         }
-        
+    }
+
+    async navigateToRadioButton(){
+        const radiobuttonPage = await this.page.waitForSelector(this.radiobuttonPage);
+        if(radiobuttonPage){
+            await this.page.locator(this.radiobuttonPage,{hasText:'Radio Button'}).click();
+            console.log('Navigation to Radio button page, successfull');
+        }else{
+            console.log('Navigation to Radio button page, unsuccessfull!');
+        }
     }
 
 }
