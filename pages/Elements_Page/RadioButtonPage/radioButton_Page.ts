@@ -15,13 +15,13 @@ class RadioButton{
         this.elementAction = new ElementActions();
         this.rbParent='//div[@class="mb-3"]/following-sibling::div';
         this.radioButtonAll='//div[@class="mb-3"]/following-sibling::div/input';
-        this.yesRB='//input[@id="yesRadio"]'
-        this.noRB='//input[@id="noRadio"]'
-        this.impressiveRB='//input[@id="impressiveRadio"]'
+        this.yesRB='//input/following-sibling::label[text()="Yes"]';
+        this.noRB='//input/following-sibling::label[text()="No"]';
+        this.impressiveRB='//input/following-sibling::label[text()="Impressive"]';
         this.radioButtonsConfig={
-            'yes':'Yes',
-            'no':'No',
-            'impressive':'Impressive'                     
+            'yes':this.yesRB,
+            'no':this.noRB,
+            'impressive':this.impressiveRB,                     
         };
     }
     
@@ -41,9 +41,18 @@ class RadioButton{
         return countRB.count();
     }
     
-    async actionRB(value:'yes'|'no'|'impressive'){
+    async editableRB(value:'yes'|'no'|'impressive'){
        const val = this.radioButtonsConfig[value];
-       await this.page.getByText(val).click();
+       return await this.page.locator(val);
+    }
+
+    async actionRB(value:'yes'|'no'|'impressive'){
+        const val = this.radioButtonsConfig[value];
+        const rb = await this.page.locator(val);
+        await this.elementAction.clickElement(rb);   
+        if(await rb.first().isChecked()){
+            return true;
+        }else{return false;}
     }
 }
 
