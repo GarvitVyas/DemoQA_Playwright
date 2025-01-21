@@ -5,6 +5,7 @@ export const data={
     'current-address':'near Jawar Nagar, T/2',
     'permanent-address':'near Jawar Nagar, T/2',
     'Home-Text':'Home',
+    'radiobuttonPage':'radio-button',
     'email-valid':/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
 };
 

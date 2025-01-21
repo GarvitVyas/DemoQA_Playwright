@@ -10,6 +10,9 @@ class RadioButton{
     private noRB:string;
     private impressiveRB:string;
     private radioButtonsConfig:{[key:string]:string};
+    private flag:boolean;
+    
+    private resultBox:string;
     constructor(page:Page){
         this.page = page;
         this.elementAction = new ElementActions();
@@ -18,6 +21,9 @@ class RadioButton{
         this.yesRB='//input/following-sibling::label[text()="Yes"]';
         this.noRB='//input/following-sibling::label[text()="No"]';
         this.impressiveRB='//input/following-sibling::label[text()="Impressive"]';
+        this.flag = false;
+        
+        this.resultBox='.mt-3'
         this.radioButtonsConfig={
             'yes':this.yesRB,
             'no':this.noRB,
@@ -47,12 +53,26 @@ class RadioButton{
     }
 
     async actionRB(value:'yes'|'no'|'impressive'){
+       
         const val = this.radioButtonsConfig[value];
         const rb = await this.page.locator(val);
         await this.elementAction.clickElement(rb);   
         if(await rb.first().isChecked()){
+            this.flag = true;
+            
             return true;
         }else{return false;}
+    }
+
+    async verifyInResult(){
+        const yes = await this.page.getByText('Yes').count();
+        const impressive = await this.page.getByText('Impressive').count();
+        if(yes == 2){
+            return 'Yes';
+        }else if(impressive == 2){
+            return 'Impressive';
+        }
+
     }
 }
 

@@ -1,6 +1,7 @@
 import {test,expect} from '@playwright/test';
 import { Element } from '../pages/Elements_Page/navigate_to_element';
 import { RadioButton } from '../pages/Elements_Page/RadioButtonPage/radioButton_Page';
+import { data} from '../pages/data/data';
 
 test.describe('Tests for Radio Buttons',()=>{
     let elementPage:Element;
@@ -37,6 +38,20 @@ test.describe('Tests for Radio Buttons',()=>{
         //verify actionale via clicking the radio button
         expect(await radiobuttonPage.actionRB('yes')).toBeTruthy();
         expect(await radiobuttonPage.actionRB('impressive')).toBeTruthy();
+    })
+
+    test('verify result box after selecting radio button',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToRadioButton();
+        //verifying page url
+        expect(await radiobuttonPage.verifyRadioButtonPage()).toContain(data['radiobuttonPage']);
+        await radiobuttonPage.actionRB('impressive');
+        const result = await radiobuttonPage.verifyInResult();
+        expect(await result).toBe('Impressive');
+
+        await radiobuttonPage.actionRB('yes');
+        const result2= await radiobuttonPage.verifyInResult();
+        expect(await result2).toBe('Yes');
     })
 
 
