@@ -47,10 +47,11 @@ test.describe('Tests for Radio Buttons',()=>{
         expect(await radiobuttonPage.verifyRadioButtonPage()).toContain(data['radiobuttonPage']);
         await radiobuttonPage.actionRB('impressive');
         const result = await radiobuttonPage.verifyInResult();
+        expect(await result).not.toBe('Yes');
         expect(await result).toBe('Impressive');
-
         await radiobuttonPage.actionRB('yes');
         const result2= await radiobuttonPage.verifyInResult();
+        expect(await result2).not.toBe('Impressive');
         expect(await result2).toBe('Yes');
     })
 
