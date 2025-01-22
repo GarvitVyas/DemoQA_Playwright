@@ -5,11 +5,13 @@ class Element{
     private textboxpage:string;
     private checkboxPage:string;
     private radiobuttonPage:string;
+    private webtablesPage:string;
     private page:Page;
     constructor(page:Page){
         this.page = page;
         this.textboxpage='.menu-list>#item-0';
-        this.checkboxPage='.menu-list>#item-1'
+        this.checkboxPage='.menu-list>#item-1';
+        this.webtablesPage = '.menu-list>#item-3'
         this.elementPage = '.category-cards>div:nth-child(1)';
         this.radiobuttonPage='.menu-list>#item-2'
     }
@@ -53,6 +55,16 @@ class Element{
             console.log('Navigation to Radio button page, successfull');
         }else{
             console.log('Navigation to Radio button page, unsuccessfull!');
+        }
+    }
+
+    async navigateToWebTalesPage(){
+        const webtablesPage = await this.page.waitForSelector(this.webtablesPage);
+        if(webtablesPage){
+            await this.page.locator(this.webtablesPage,{hasText:'Web Tables'}).click();
+            console.log('Navigation to web tables page, successfull!');
+        }else{
+            throw new Error('Navigation to web tables page, unsuccessfull!');
         }
     }
 
