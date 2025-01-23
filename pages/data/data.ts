@@ -19,6 +19,14 @@ const staticUser={
     'Department':'Compliance'
 }
 
+const newUser={
+    'First Name':'Garvit',
+    'last Name' : 'Vyas',
+    'Age' : '25',
+    'Email' : 'gvyas@example.com',
+    'Salary' : '2200000',
+    'Department':'Test Automation'
+}
 data['permanent-address']=data['current-address'];
 
-export{data, staticUser};
+export{data, staticUser, newUser};

@@ -1,5 +1,5 @@
 import {test,expect} from '@playwright/test';
-import { data,staticUser } from '../pages/data/data';
+import { data,staticUser,newUser } from '../pages/data/data';
 import { Element } from '../pages/Elements_Page/navigate_to_element';
 import { WebTables } from '../pages/Elements_Page/WebTablePage/webTables_Page';
 
@@ -31,7 +31,24 @@ test.describe('Tests for web tables',()=>{
         expect(udata['Salary']).toEqual(staticUser['Salary']);
         expect(udata['Department']).toEqual(staticUser['Department']);
     })
+     
+    test('Add a new record in the table',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToWebTalesPage();
+        expect(await webtablePage.verifyWebTablePage()).toContain(data['webtablePage']);
+        const addVisibility = await webtablePage.verifyAddCTA();
+        expect(addVisibility).toBeTruthy();
+        await webtablePage.addRecord();
 
+        //VERIFY ADDED DATA
+        const newData = await webtablePage.addedRecord();
+        expect(newData['First Name']).toEqual(newUser['First Name']);
+        expect(newData['Last Name']).toEqual(newUser['last Name']);
+        expect(newData['Age']).toEqual(newUser['Age']);
+        expect(newData['Email']).toEqual(newUser['Email']);
+        expect(newData['Salary']).toEqual(newUser['Salary']);
+        expect(newData['Department']).toEqual(newUser['Department']);
+    })
 
 })
 
