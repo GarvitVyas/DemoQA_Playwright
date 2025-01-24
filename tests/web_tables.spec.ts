@@ -50,5 +50,16 @@ test.describe('Tests for web tables',()=>{
         expect(newData['Department']).toEqual(newUser['Department']);
     })
 
+    test('Verify action edit second record name and salary',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToWebTalesPage();
+        expect(await webtablePage.verifyWebTablePage()).toContain(data['webtablePage']);
+        expect(await webtablePage.verifyAddAcitonable()).toBeEditable();
+        await webtablePage.editRecord();
+        const newdetails = await webtablePage.verifyEdited();
+        expect(newdetails[0]).toBe(newUser['newName']);
+        expect(newdetails[1]).toBe(newUser['newSalary']);
+    })
+
 })
 

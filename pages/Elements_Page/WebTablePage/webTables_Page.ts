@@ -17,11 +17,13 @@ class WebTables{
     private department:string;
     private submitcta:string;
     private closeCTA:string;
+    private editRecordCTA:string;
     private staticUserObject:{[key:string]:string};
     private newUserData:{[key:string]:string};
     constructor(page:Page){
         this.page = page;
         this.elementActions=new ElementActions;
+        this.editRecordCTA='//*[@id="edit-record-2"]';
         this.addFN='//*[@id="firstName-wrapper"]//input'
         this.addLN='//*[@id="lastName-wrapper"]//input'
         this.email='//*[@id="userEmail-wrapper"]//input'
@@ -101,7 +103,27 @@ class WebTables{
         }
         return newUserData;
     }
+    async verifyAddAcitonable(){
+        return await this.page.locator(this.editRecordCTA);
+    }
 
+    async editRecord(){
+        await this.page.locator(this.editRecordCTA).click();
+        const frame = await this.page.locator(this.addFrame);
+        const visible=await this.elementActions.visibilityCheck(frame);
+        if(visible){
+            await this.page.locator(this.addFN).clear();
+            await this.page.locator(this.addFN).fill('Aksay');
+            await this.page.locator(this.salary).clear();
+            await this.page.locator(this.salary).fill('65000');
+            await this.page.locator(this.submitcta).click();
+        }
+    }
+    async verifyEdited(){
+        const newName = await this.page.locator(this.staticUserObject['First Name']).textContent();
+        const newSalary = await this.page.locator(this.staticUserObject['Salary']).textContent();
+        return [newName,newSalary];
+    }
 
 
 

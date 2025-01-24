@@ -25,7 +25,9 @@ const newUser={
     'Age' : '25',
     'Email' : 'gvyas@example.com',
     'Salary' : '2200000',
-    'Department':'Test Automation'
+    'Department':'Test Automation',
+    'newName':'Aksay',
+    'newSalary':'65000'
 }
 data['permanent-address']=data['current-address'];
 
