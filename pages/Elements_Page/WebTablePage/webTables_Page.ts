@@ -18,11 +18,15 @@ class WebTables{
     private submitcta:string;
     private closeCTA:string;
     private editRecordCTA:string;
+    private allAddFields:string;
+    private allAddLabels:string;
     private staticUserObject:{[key:string]:string};
     private newUserData:{[key:string]:string};
     constructor(page:Page){
         this.page = page;
         this.elementActions=new ElementActions;
+        this.allAddFields='//*[@id="userForm"]/div//div[2]/input';
+        this.allAddLabels='//*[@id="userForm"]/div//div[1]/label';
         this.editRecordCTA='//*[@id="edit-record-2"]';
         this.addFN='//*[@id="firstName-wrapper"]//input'
         this.addLN='//*[@id="lastName-wrapper"]//input'
@@ -94,6 +98,13 @@ class WebTables{
         await this.elementActions.clickElement(await this.page.locator(this.submitcta));
     }
 
+    async errorFields(){
+        await this.elementActions.clickElement(await this.page.locator(this.addCTA));
+        await  await this.page.locator(this.addFN).fill(newUser['First Name']);
+        await this.page.locator(this.addLN).fill(newUser['last Name']);
+        await this.elementActions.clickElement(await this.page.locator(this.submitcta));
+    }
+
     async addedRecord(){
         const newUserData:{[key:string]:string}={};
         for(const key in this.newUserData){
@@ -125,8 +136,20 @@ class WebTables{
         return [newName,newSalary];
     }
 
+    async verifyErrorFields(){
+        await this.page.waitForTimeout(500);
+        const ele = await this.page.locator(this.allAddFields);
+        const label = await this.page.locator(this.allAddLabels);
+        for(let i=0;i<await ele.count();i++){
+            const style = await this.elementActions.CSSproperty(await ele.nth(i));
+            if(style.borderBottomColor == 'rgb(220, 53, 69)'){
+                console.log(`Please Enter ${await label.nth(i).textContent()}`);
+            }
+        }        
+      }  
+    
+    }
 
 
 
-}
 export {WebTables};

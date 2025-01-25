@@ -25,6 +25,12 @@ class ElementActions{
         return await locator.getAttribute('class');
     }
 
+    async CSSproperty(locator:Locator){
+        return await locator.evaluate((i)=>{
+            return window.getComputedStyle(i);
+        })
+    }
+
 }
 
 export{ElementActions};

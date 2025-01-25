@@ -61,5 +61,15 @@ test.describe('Tests for web tables',()=>{
         expect(newdetails[1]).toBe(newUser['newSalary']);
     })
 
+    test('Verify error field on add frame',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToWebTalesPage();
+        expect(await webtablePage.verifyWebTablePage()).toContain(data['webtablePage']);
+        if(await webtablePage.verifyAddCTA()){
+            await webtablePage.errorFields();
+            await webtablePage.verifyErrorFields();
+        }else{throw new Error('Frame not opening!')}
+    })
+
 })
 
