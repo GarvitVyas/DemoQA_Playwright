@@ -137,15 +137,18 @@ class WebTables{
     }
 
     async verifyErrorFields(){
+        const errorFields:string[]=[];
         await this.page.waitForTimeout(500);
         const ele = await this.page.locator(this.allAddFields);
         const label = await this.page.locator(this.allAddLabels);
         for(let i=0;i<await ele.count();i++){
             const style = await this.elementActions.CSSproperty(await ele.nth(i));
             if(style.borderBottomColor == 'rgb(220, 53, 69)'){
-                console.log(`Please Enter ${await label.nth(i).textContent()}`);
+                const temp = await label.nth(i).textContent();
+                errorFields.push(temp!);
             }
-        }        
+        } 
+        return errorFields;       
       }  
     
     }

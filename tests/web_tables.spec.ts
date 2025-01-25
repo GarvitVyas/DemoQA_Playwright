@@ -67,7 +67,11 @@ test.describe('Tests for web tables',()=>{
         expect(await webtablePage.verifyWebTablePage()).toContain(data['webtablePage']);
         if(await webtablePage.verifyAddCTA()){
             await webtablePage.errorFields();
-            await webtablePage.verifyErrorFields();
+           const errors = await webtablePage.verifyErrorFields();
+           expect(await errors[0]).toBe('Email');
+           expect(await errors[1]).toBe('Age');
+           expect(await errors[2]).toBe('Salary');
+           expect(await errors[3]).toBe('Department');
         }else{throw new Error('Frame not opening!')}
     })
 
