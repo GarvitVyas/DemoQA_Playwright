@@ -25,20 +25,20 @@ class WebTables{
     constructor(page:Page){
         this.page = page;
         this.elementActions=new ElementActions;
+        this.rowPerPage='[aria-label="rows per page"]';
         this.allAddFields='//*[@id="userForm"]/div//div[2]/input';
         this.allAddLabels='//*[@id="userForm"]/div//div[1]/label';
         this.editRecordCTA='//*[@id="edit-record-2"]';
-        this.addFN='//*[@id="firstName-wrapper"]//input'
-        this.addLN='//*[@id="lastName-wrapper"]//input'
-        this.email='//*[@id="userEmail-wrapper"]//input'
-        this.age='//*[@id="age-wrapper"]//input'
-        this.salary='//*[@id="salary-wrapper"]//input'
-        this.department='//*[@id="department-wrapper"]//input'
-        this.addFrame='//div[@role="document"]/div'
-        this.addCTA='//button[text()="Add"]'
-        this.submitcta='//*[@id="submit"]'
-        this.closeCTA='//button[@class="close"]'
-        this.rowPerPage='.-center>span>select[aria-label="rows per page"]'
+        this.addFN='//*[@id="firstName-wrapper"]//input';
+        this.addLN='//*[@id="lastName-wrapper"]//input';
+        this.email='//*[@id="userEmail-wrapper"]//input';
+        this.age='//*[@id="age-wrapper"]//input';
+        this.salary='//*[@id="salary-wrapper"]//input';
+        this.department='//*[@id="department-wrapper"]//input';
+        this.addFrame='//div[@role="document"]/div';
+        this.addCTA='//button[text()="Add"]';
+        this.submitcta='//*[@id="submit"]';
+        this.closeCTA='//button[@class="close"]';
         this.rowsCount='//div[@class="rt-table"]/div[2]/div';
         this.staticUserObject={
             'First Name':'//*[@class="rt-table"]/div[2]/div[2]/div/div[1]',
@@ -68,7 +68,7 @@ class WebTables{
     }
     async verifyRowCount(){
         const rowsCount = await this.page.locator(this.rowsCount).count();
-        return rowsCount;
+        return rowsCount+'';
     }
 
     //static user details return
@@ -150,6 +150,12 @@ class WebTables{
         } 
         return errorFields;       
       }  
+
+      async changeRowPerPage(option:string){
+        await this.elementActions.selectFromDropDown(await this.page.locator(this.rowPerPage),option);
+        const newCount = await this.verifyRowPerPage();
+        return newCount;
+      }
     
     }
 

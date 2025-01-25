@@ -31,6 +31,16 @@ class ElementActions{
         })
     }
 
+    async getCount(locator:Locator){
+        await locator.waitFor({state:'visible'});
+        return await locator.count();
+    }
+
+    async selectFromDropDown(locator:Locator,option:string){
+        await locator.waitFor({state:'visible'});
+        return await locator.selectOption({value:option});
+    }
+
 }
 
 export{ElementActions};

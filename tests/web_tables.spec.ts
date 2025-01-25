@@ -75,5 +75,13 @@ test.describe('Tests for web tables',()=>{
         }else{throw new Error('Frame not opening!')}
     })
 
+    test('Verify changing the number of rows',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToWebTalesPage();
+        expect(await webtablePage.verifyWebTablePage()).toContain(data['webtablePage']);
+        const newCount = await webtablePage.changeRowPerPage('20');
+        expect(await newCount).toEqual(await webtablePage.verifyRowCount());
+    })
+
 })
 
