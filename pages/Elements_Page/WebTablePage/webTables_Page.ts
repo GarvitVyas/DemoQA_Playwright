@@ -6,6 +6,7 @@ class WebTables{
     private page:Page;
     private rowsCount:string;
     private rowPerPage:string;
+    private searchBox:string;
     private elementActions:ElementActions;
     private addCTA:string;
     private addFrame: string;
@@ -25,6 +26,7 @@ class WebTables{
     constructor(page:Page){
         this.page = page;
         this.elementActions=new ElementActions;
+        this.searchBox='//*[@id="searchBox"]';
         this.rowPerPage='[aria-label="rows per page"]';
         this.allAddFields='//*[@id="userForm"]/div//div[2]/input';
         this.allAddLabels='//*[@id="userForm"]/div//div[1]/label';
@@ -156,7 +158,24 @@ class WebTables{
         const newCount = await this.verifyRowPerPage();
         return newCount;
       }
-    
+      
+      async verifySearchBox(){
+        const searchbox = await this.page.locator(this.searchBox);
+        return await this.elementActions.visibilityCheck(searchbox);
+      }
+      
+      async searchBoxInput(value:string){
+        const values = await this.page.locator(this.rowsCount);
+        const valcount = await values.count();
+        for(let i =0; i<valcount;i++){
+            const temp = await values.nth(i).innerText();
+            if(temp?.includes(value)){
+                return true;
+            }
+        }
+        return false;
+      }
+
     }
 
 
