@@ -7,6 +7,7 @@ const data={
     'Home-Text':'Home',
     'webtablePage':'webtables',
     'radiobuttonPage':'radio-button',
+    'buttonsPage':'buttons',
     'email-valid':/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
 };
 
