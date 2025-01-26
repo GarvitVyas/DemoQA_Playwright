@@ -163,8 +163,10 @@ class WebTables{
         const searchbox = await this.page.locator(this.searchBox);
         return await this.elementActions.visibilityCheck(searchbox);
       }
-      
+
       async searchBoxInput(value:string){
+        const searchBox = await this.page.locator(this.searchBox);
+        await this.elementActions.fillInData(searchBox,value);
         const values = await this.page.locator(this.rowsCount);
         const valcount = await values.count();
         for(let i =0; i<valcount;i++){
