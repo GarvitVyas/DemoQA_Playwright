@@ -3,7 +3,7 @@ import { data,staticUser,newUser } from '../pages/data/data';
 import { Element } from '../pages/Elements_Page/navigate_to_element';
 import { WebTables } from '../pages/Elements_Page/WebTablePage/webTables_Page';
 
-test.describe('Tests for web tables',()=>{
+test.describe('@webtables - Tests for web tables',()=>{
 
     let elementPage:Element;
     let webtablePage:WebTables;
@@ -18,7 +18,7 @@ test.describe('Tests for web tables',()=>{
         }
     })
 
-    test('Navigate to web table and verify record',async({})=>{
+    test('@verifyRecord - Navigate to web table and verify record',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToWebTalesPage();
         expect(await webtablePage.verifyWebTablePage()).toContain(data['webtablePage']);
@@ -32,7 +32,7 @@ test.describe('Tests for web tables',()=>{
         expect(udata['Department']).toEqual(staticUser['Department']);
     })
      
-    test('Add a new record in the table',async({})=>{
+    test('@addRecord - Add a new record in the table',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToWebTalesPage();
         expect(await webtablePage.verifyWebTablePage()).toContain(data['webtablePage']);
@@ -50,7 +50,7 @@ test.describe('Tests for web tables',()=>{
         expect(newData['Department']).toEqual(newUser['Department']);
     })
 
-    test('Verify action edit second record name and salary',async({})=>{
+    test('@actionEdit - Verify action edit second record name and salary',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToWebTalesPage();
         expect(await webtablePage.verifyWebTablePage()).toContain(data['webtablePage']);
@@ -61,7 +61,7 @@ test.describe('Tests for web tables',()=>{
         expect(newdetails[1]).toBe(newUser['newSalary']);
     })
 
-    test('Verify error field on add frame',async({})=>{
+    test('@errorOnAdd - Verify error field on add frame',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToWebTalesPage();
         expect(await webtablePage.verifyWebTablePage()).toContain(data['webtablePage']);
@@ -75,13 +75,25 @@ test.describe('Tests for web tables',()=>{
         }else{throw new Error('Frame not opening!')}
     })
 
-    test('Verify changing the number of rows',async({})=>{
+    test('@numberOfRows - Verify changing the number of rows',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToWebTalesPage();
         expect(await webtablePage.verifyWebTablePage()).toContain(data['webtablePage']);
         const newCount = await webtablePage.changeRowPerPage('20');
         expect(await newCount).toEqual(await webtablePage.verifyRowCount());
     })
+
+    test('@searchBoxValid - Search a valid record using search box',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToWebTalesPage();
+        expect(await webtablePage.verifyWebTablePage()).toContain(data['webtablePage']);
+        //search box visibility
+        expect(await webtablePage.verifySearchBox()).toBeTruthy();
+        //fill valid record in search box
+        const present = await webtablePage.searchBoxInput('Alden');
+        expect(present).toBeTruthy();
+    })
+
 
 })
 
