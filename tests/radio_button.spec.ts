@@ -3,7 +3,7 @@ import { Element } from '../pages/Elements_Page/navigate_to_element';
 import { RadioButton } from '../pages/Elements_Page/RadioButtonPage/radioButton_Page';
 import { data} from '../pages/data/data';
 
-test.describe('Tests for Radio Buttons',()=>{
+test.describe('@radiobutton - Tests for Radio Buttons',()=>{
     let elementPage:Element;
     let radiobuttonPage:RadioButton;
 
@@ -17,7 +17,7 @@ test.describe('Tests for Radio Buttons',()=>{
        }
     })
   
-    test('verify radio button actionable',async({})=>{
+    test('@verifyRadioButton - verify radio button actionable',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToRadioButton();
 
@@ -40,7 +40,7 @@ test.describe('Tests for Radio Buttons',()=>{
         expect(await radiobuttonPage.actionRB('impressive')).toBeTruthy();
     })
 
-    test('verify result box after selecting radio button',async({})=>{
+    test('@radiobuttonResult - verify result box after selecting radio button',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToRadioButton();
         //verifying page url

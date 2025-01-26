@@ -2,9 +2,9 @@ import {test,expect} from '@playwright/test';
 import { Element } from '../pages/Elements_Page/navigate_to_element';
 import { CheckBox } from '../pages/Elements_Page/CheckBoxPage/checkBox_Page';
 import { data } from '../pages/data/data';
-import { emitKeypressEvents } from 'readline';
 
-test.describe('Tests for check box functionality',()=>{
+
+test.describe('@checkbox - Tests for check box functionality',()=>{
     let elementPage:Element;
     let checkboxPage:CheckBox;
 
@@ -14,7 +14,7 @@ test.describe('Tests for check box functionality',()=>{
         checkboxPage = new CheckBox(page);
     })
 
-    test('Verify the home checkbox',async({})=>{
+    test('@homeCheckBox - Verify the home checkbox',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToCheckBox();
         const url = await checkboxPage.verifyCheckBoxPage();
@@ -32,7 +32,7 @@ test.describe('Tests for check box functionality',()=>{
         expect(check?.includes('check')).toBeTruthy();
        })
 
-       test('verify the expand and collapse CTA',async({})=>{
+       test('@expandCollapse - verify the expand and collapse CTA',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToCheckBox();
         expect(await checkboxPage.verifyCheckBoxPage()).toContain('checkbox');
@@ -48,7 +48,7 @@ test.describe('Tests for check box functionality',()=>{
         
         })
 
-        test('verify if check box is checked/ partially checked/ or unchecked',async({})=>{
+        test('@verifyCheckBox - verify if check box is checked/ partially checked/ or unchecked',async({})=>{
             await elementPage.navigateToElementPage();
             await elementPage.navigateToCheckBox();
             //expand all the checkboxes
@@ -66,7 +66,7 @@ test.describe('Tests for check box functionality',()=>{
             expect(await checkboxPage.verifyCheckBoxChecked(0)).toContain('uncheck'); 
         })
 
-        test.only('verify the selected items are shown in result window',async({})=>{
+        test.only('@resultWindow - verify the selected items are shown in result window',async({})=>{
             await elementPage.navigateToElementPage();
             await elementPage.navigateToCheckBox();
             //verify initially home is uncheck

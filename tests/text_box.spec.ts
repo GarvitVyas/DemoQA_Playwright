@@ -5,7 +5,7 @@ import {data} from '../pages/data/data';
 
 
 
-test.describe('Text Box tests',()=>{
+test.describe('@textbox - Text Box tests',()=>{
     let elementPage:Element;
     let textboxPage:TextBox;
     
@@ -20,7 +20,7 @@ test.describe('Text Box tests',()=>{
       }
     })
     
-    test('Navigate to text box page and fill in details',async({})=>{
+    test('@fillData - Navigate to text box page and fill in details',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToTextBox();
         //full name
@@ -71,7 +71,7 @@ test.describe('Text Box tests',()=>{
         expect(resultWindow).toContainText(data['permanent-address']);
       })
 
-      test('Navigate to test box page and verify result on empty fields',async({})=>{
+      test('@emptyFields - Navigate to test box page and verify result on empty fields',async({})=>{
 
         await elementPage.navigateToElementPage();
         await elementPage.navigateToTextBox();
@@ -82,7 +82,7 @@ test.describe('Text Box tests',()=>{
 
       })
 
-      test('verify email field when user enter email invalid format',async({})=>{
+      test('@emailValidation - verify email field when user enter email invalid format',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToTextBox();
 
