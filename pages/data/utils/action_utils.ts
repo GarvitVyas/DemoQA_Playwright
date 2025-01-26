@@ -41,6 +41,12 @@ class ElementActions{
         return await locator.selectOption({value:option});
     }
 
+    async fillInData(locator:Locator,value:string){
+        await locator.waitFor({state:'visible'});
+        await locator.clear();
+        await locator.fill(value);
+    }
+
 }
 
 export{ElementActions};
