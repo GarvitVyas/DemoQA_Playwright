@@ -6,14 +6,18 @@ class Element{
     private checkboxPage:string;
     private radiobuttonPage:string;
     private webtablesPage:string;
+    private buttonsPage:string;
+    private linksPage:string;
     private page:Page;
     constructor(page:Page){
         this.page = page;
         this.textboxpage='.menu-list>#item-0';
         this.checkboxPage='.menu-list>#item-1';
-        this.webtablesPage = '.menu-list>#item-3'
+        this.webtablesPage = '.menu-list>#item-3';
+        this.buttonsPage='.menu-list>#item-4'
         this.elementPage = '.category-cards>div:nth-child(1)';
-        this.radiobuttonPage='.menu-list>#item-2'
+        this.radiobuttonPage='.menu-list>#item-2';
+        this.linksPage='.menu-list>#item-5';
     }
 
     async navigateToElementPage(){
@@ -65,6 +69,34 @@ class Element{
             console.log('Navigation to web tables page, successfull!');
         }else{
             throw new Error('Navigation to web tables page, unsuccessfull!');
+        }
+    }
+
+    async navigateToButtonsPage(){
+        try {
+            const buttonPage = await this.page.waitForSelector(this.buttonsPage);
+            if(buttonPage){
+                await this.page.locator(this.buttonsPage,{hasText:'Buttons'}).click();
+                console.info('Navigation to buttons page, successfull!');
+            }else{
+                throw new Error('Navigation to buttons page, unsuccessfull!');
+            }
+        }catch(error){
+            throw error;
+        }
+    }
+
+    async navigateToLinksPage(){
+        try{
+            const links = await this.page.waitForSelector(this.linksPage);
+            if(links){
+                await this.page.locator(this.linksPage,{hasText:'Links'}).click();
+                console.info('Navigation to links page, successfull!');
+            }else{
+                throw new Error('Navigation to links page, unsuccessfull!');
+            }
+        }catch(err){
+            throw err;
         }
     }
 
