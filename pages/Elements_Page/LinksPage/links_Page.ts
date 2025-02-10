@@ -19,5 +19,19 @@ class Links{
         const value = await this.page.locator(this.homeSimpleLink).innerText();
         return value;
     }
+
+    async actionLink(){
+        const homeLink = await this.page.locator(this.homeSimpleLink);
+       // await homeLink.click();
+        const [newPage] = await Promise.all([
+             this.page.context().waitForEvent('page'),
+              homeLink.click(),            
+        ]);
+
+        await newPage.waitForLoadState();
+        const newUrl = await newPage.url();
+        await newPage.close();
+        return newUrl;
+    }
 }
 export{Links}

@@ -8,6 +8,7 @@ const data={
     'webtablePage':'webtables',
     'radiobuttonPage':'radio-button',
     'buttonsPage':'buttons',
+    'links page':'links',
     'double click text':'You have done a double click',
     'right click text':'You have done a right click',
     'dynamic click test':'You have done a dynamic click',
