@@ -25,9 +25,18 @@ test.describe('@linksPage - tests to verify links page',()=>{
         expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
 
         expect(await linksPage.verifyHomeSimpleLink()).toBe('Home');
-        expect(await linksPage.actionLink()).toBe(config.baseURL+'/');
-
+        expect(await linksPage.actionHomeLink()).toBe(config.baseURL+'/');
     })
 
+
+
+    test('@homeDynamicLink - verify the home dynamic link opens new tab',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToLinksPage();
+        expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
+
+        expect(await linksPage.verifyHomeDynamicLink()).toContain('Home');
+        expect(await linksPage.actionHomeDynamicLink()).toBe(config.baseURL+'/');
+    })
     
 })
