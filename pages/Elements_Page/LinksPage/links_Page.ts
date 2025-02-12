@@ -6,8 +6,10 @@ class Links{
     private elementActions:ElementActions;
     private homeSimpleLink:string;
     private homeDynamicLink:string;
+    private createLink:string;
     constructor(page:Page){
         this.page = page;
+        this.createLink='a#created';
         this.homeSimpleLink='a#simpleLink';
         this.homeDynamicLink='a#dynamicLink'
         this.elementActions = new ElementActions();
@@ -53,6 +55,16 @@ class Links{
         ])
         const newPage = await result[0];
         return await newPage.url();
+    }
+
+    async createdLink(){
+        const apiresponse = this.page.waitForResponse(response=>
+            response.url().includes('/created') && response.status()===201
+        );
+
+        await this.page.locator(this.createLink).click();
+        const response = await apiresponse;
+        return response;
     }
 }
 export{Links}
