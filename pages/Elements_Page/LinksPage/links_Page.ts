@@ -7,8 +7,10 @@ class Links{
     private homeSimpleLink:string;
     private homeDynamicLink:string;
     private createLink:string;
+    private noContent:string;
     constructor(page:Page){
         this.page = page;
+        this.noContent='a#no-content';
         this.createLink='a#created';
         this.homeSimpleLink='a#simpleLink';
         this.homeDynamicLink='a#dynamicLink'
@@ -64,6 +66,15 @@ class Links{
 
         await this.page.locator(this.createLink).click();
         const response = await apiresponse;
+        return response;
+    }
+
+    async noContentLink(){
+        const apicall = this.page.waitForResponse(response=>
+            response.url().includes('/no-content')
+        )
+        await this.page.locator(this.noContent).click();
+        const response = await apicall;
         return response;
     }
 }
