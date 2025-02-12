@@ -50,4 +50,12 @@ test.describe('@linksPage - tests to verify links page',()=>{
         expect(response.request().method()).toBe('GET');
     })
     
+    test('@noContent - action no content link and verify the response',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToLinksPage();
+        expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
+        const response = await linksPage.noContentLink();
+        expect(response.status()).toBe(204);
+        expect(response.request().method()).toBe('GET');
+    })
 })
