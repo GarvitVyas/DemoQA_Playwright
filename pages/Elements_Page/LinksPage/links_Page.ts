@@ -13,6 +13,7 @@ class Links{
     private unauth:string;
     private linkResponse:string;
     private forbidden:string;
+    private notFound:string;
 
     constructor(page:Page){
         this.page = page;
@@ -25,6 +26,7 @@ class Links{
         this.createLink='a#created';
         this.homeSimpleLink='a#simpleLink';
         this.homeDynamicLink='a#dynamicLink';
+        this.notFound='a#invalid-url'
         this.elementActions = new ElementActions();
     }
 
@@ -125,6 +127,15 @@ class Links{
             response.url().includes('/forbidden')
         )
         await this.page.locator(this.forbidden).click();
+        const response = await apicall;
+        return response;
+    }
+
+    async notFoundCall(){
+        const apicall = this.page.waitForResponse(Response=>
+            Response.url().includes('invalid-url')
+        )
+        await this.page.locator(this.notFound).click();
         const response = await apicall;
         return response;
     }
