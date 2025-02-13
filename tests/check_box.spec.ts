@@ -66,7 +66,7 @@ test.describe('@checkbox - Tests for check box functionality',()=>{
             expect(await checkboxPage.verifyCheckBoxChecked(0)).toContain('uncheck'); 
         })
 
-        test.only('@resultWindow - verify the selected items are shown in result window',async({})=>{
+        test('@resultWindow - verify the selected items are shown in result window',async({})=>{
             await elementPage.navigateToElementPage();
             await elementPage.navigateToCheckBox();
             //verify initially home is uncheck

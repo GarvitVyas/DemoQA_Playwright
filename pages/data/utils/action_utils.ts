@@ -47,6 +47,18 @@ class ElementActions{
         await locator.fill(value);
     }
 
+    async clickWithAction(locator:Locator,action:'left'|'right'){
+       
+        await locator.waitFor({state:'visible'});
+        await locator.click({button:action})
+    }
+
+    async doubleClick(locator:Locator){
+        await locator.waitFor({state:'visible'});
+        await locator.dblclick();
+    }
+
+
 }
 
 export{ElementActions};
