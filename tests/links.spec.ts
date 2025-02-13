@@ -3,6 +3,7 @@ import { Element } from '../pages/Elements_Page/navigate_to_element';
 import { Links } from '../pages/Elements_Page/LinksPage/links_Page';
 import { data } from '../pages/data/data';
 import {config} from '../config';
+import { hostname } from 'os';
 
 test.describe('@linksPage - tests to verify links page',()=>{
     let elementPage:Element;
@@ -58,4 +59,16 @@ test.describe('@linksPage - tests to verify links page',()=>{
         expect(response.status()).toBe(204);
         expect(response.request().method()).toBe('GET');
     })
+
+    test('@moved - action moved link and verify the response',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToLinksPage();
+        expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
+        const response = await linksPage.movedLinkCall();
+        expect(response.status()).toBe(301);
+        expect(response.request().method()).toBe('GET');
+        expect(response.statusText()).toContain('Moved Permanently');
+    })
+
+
 })
