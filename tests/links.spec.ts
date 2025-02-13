@@ -45,48 +45,74 @@ test.describe('@linksPage - tests to verify links page',()=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToLinksPage();
         expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
-
+        
+        expect(await linksPage.verifyResponseLink()).toBeFalsy();
         const response = await linksPage.createdLink();
         expect(response.status()).toBe(201);
         expect(response.request().method()).toBe('GET');
+        const value = await linksPage.verifyResponseLinkData();
+        let result = value.split(' ');
+        expect(await result).toContain('201');
+        expect(await result).toContain('Created');
     })
     
     test('@noContent - action no content link and verify the response',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToLinksPage();
         expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
+        expect(await linksPage.verifyResponseLink()).toBeFalsy();
         const response = await linksPage.noContentLink();
         expect(response.status()).toBe(204);
         expect(response.request().method()).toBe('GET');
+        const value = await linksPage.verifyResponseLinkData();
+        let result = value.split(' ');
+        expect(await result).toContain('204');
+        expect(await value).toContain('No Content');
     })
 
     test('@moved - action moved link and verify the response',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToLinksPage();
         expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
+        expect(await linksPage.verifyResponseLink()).toBeFalsy();
         const response = await linksPage.movedLinkCall();
         expect(response.status()).toBe(301);
         expect(response.request().method()).toBe('GET');
         expect(response.statusText()).toContain('Moved Permanently');
+        const value = await linksPage.verifyResponseLinkData();
+        let result = value.split(' ');
+        expect(await result).toContain('301');
+        expect(await value).toContain('Moved Permanently');
     })
 
     test('@badRequest - action bad request link and verify the response',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToLinksPage();
         expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
+        expect(await linksPage.verifyResponseLink()).toBeFalsy();
         const response = await linksPage.badRequestCall();
         expect(response.status()).toBe(400);
         expect(response.request().method()).toBe('GET');
         expect(response.statusText()).toContain('Bad Request');
+        const value = await linksPage.verifyResponseLinkData();
+        let result = value.split(' ');
+        expect(await result).toContain('400');
+        expect(await value).toContain('Bad Request');
     })
 
     test('@unauthorized - action unauthorized link and verify the response',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToLinksPage();
         expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
+        expect(await linksPage.verifyResponseLink()).toBeFalsy();
         const response = await linksPage.unauthorizedCall();
         expect(response.status()).toBe(401);
         expect(response.request().method()).toBe('GET');
         expect(response.statusText()).toContain('Unauthorized');
+
+        const value = await linksPage.verifyResponseLinkData();
+        let result = value.split(' ');
+        expect(await result).toContain('401');
+        expect(await result).toContain('Unauthorized');
     })
 })
