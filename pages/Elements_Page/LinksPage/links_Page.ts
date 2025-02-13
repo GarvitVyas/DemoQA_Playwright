@@ -9,8 +9,10 @@ class Links{
     private createLink:string;
     private noContent:string;
     private movedLink:string;
+    private badRequest:string;
     constructor(page:Page){
         this.page = page;
+        this.badRequest='a#bad-request';
         this.noContent='a#no-content';
         this.movedLink='a#moved';
         this.createLink='a#created';
@@ -85,6 +87,15 @@ class Links{
             response.url().includes('/moved')
         );
         await this.page.locator(this.movedLink).click();
+        const response = await apicall;
+        return response;
+    }
+
+    async badRequestCall(){
+        const apicall = this.page.waitForResponse(response=>
+            response.url().includes('bad-request')
+        )
+        await this.page.locator(this.badRequest).click();
         const response = await apicall;
         return response;
     }
