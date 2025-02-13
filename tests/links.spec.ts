@@ -115,4 +115,21 @@ test.describe('@linksPage - tests to verify links page',()=>{
         expect(await result).toContain('401');
         expect(await result).toContain('Unauthorized');
     })
+
+    test('@forbidden - action forbidden link and verify the response',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToLinksPage();
+        expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
+        expect(await linksPage.verifyResponseLink()).toBeFalsy();
+        const response = await linksPage.forbiddenCall();
+        expect(response.status()).toBe(403);
+        expect(response.request().method()).toBe('GET');
+        expect(response.statusText()).toContain('Forbidden');
+
+        const value = await linksPage.verifyResponseLinkData();
+        let result = value.split(' ');
+        expect(await result).toContain('403');
+        expect(await result).toContain('Forbidden');
+    })
+
 })
