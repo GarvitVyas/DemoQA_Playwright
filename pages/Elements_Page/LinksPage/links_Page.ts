@@ -11,8 +11,10 @@ class Links{
     private movedLink:string;
     private badRequest:string;
     private unauth:string;
+    private linkResponse:string;
     constructor(page:Page){
         this.page = page;
+        this.linkResponse='p#linkResponse';
         this.unauth='a#unauthorized';
         this.badRequest='a#bad-request';
         this.noContent='a#no-content';
@@ -65,6 +67,10 @@ class Links{
         return await newPage.url();
     }
 
+    async verifyResponseLink(){
+        return await this.elementActions.visibilityCheck(await this.page.locator(this.linkResponse));
+    }
+
     async createdLink(){
         const apiresponse = this.page.waitForResponse(response=>
             response.url().includes('/created') && response.status()===201
@@ -109,6 +115,11 @@ class Links{
         await this.page.locator(this.unauth).click();
         const response = await apicall;
         return response;
+    }
+
+    async verifyResponseLinkData():Promise<string>{
+        const data = await this.page.locator(this.linkResponse).textContent();
+        return data!;
     }
 }
 export{Links}
