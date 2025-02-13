@@ -8,9 +8,11 @@ class Links{
     private homeDynamicLink:string;
     private createLink:string;
     private noContent:string;
+    private movedLink:string;
     constructor(page:Page){
         this.page = page;
         this.noContent='a#no-content';
+        this.movedLink='a#moved';
         this.createLink='a#created';
         this.homeSimpleLink='a#simpleLink';
         this.homeDynamicLink='a#dynamicLink'
@@ -74,6 +76,15 @@ class Links{
             response.url().includes('/no-content')
         )
         await this.page.locator(this.noContent).click();
+        const response = await apicall;
+        return response;
+    }
+
+    async movedLinkCall(){
+        const apicall = this.page.waitForResponse(response =>
+            response.url().includes('/moved')
+        );
+        await this.page.locator(this.movedLink).click();
         const response = await apicall;
         return response;
     }
