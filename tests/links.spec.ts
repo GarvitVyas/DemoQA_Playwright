@@ -132,4 +132,20 @@ test.describe('@linksPage - tests to verify links page',()=>{
         expect(await result).toContain('Forbidden');
     })
 
+    test('@notFound - action not found link and verify the response',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToLinksPage();
+        expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
+        expect(await linksPage.verifyResponseLink()).toBeFalsy();
+        const response = await linksPage.notFoundCall();
+        expect(response.status()).toBe(404);
+        expect(response.request().method()).toBe('GET');
+        expect(response.statusText()).toContain('Not Found');
+        const value = await linksPage.verifyResponseLinkData();
+        let result = value.split(' ');
+        expect(await result).toContain('404');
+        expect(await value).toContain('Not Found');
+       
+    })
+
 })
