@@ -10,8 +10,10 @@ class Links{
     private noContent:string;
     private movedLink:string;
     private badRequest:string;
+    private unauth:string;
     constructor(page:Page){
         this.page = page;
+        this.unauth='a#unauthorized';
         this.badRequest='a#bad-request';
         this.noContent='a#no-content';
         this.movedLink='a#moved';
@@ -96,6 +98,15 @@ class Links{
             response.url().includes('bad-request')
         )
         await this.page.locator(this.badRequest).click();
+        const response = await apicall;
+        return response;
+    }
+
+    async unauthorizedCall(){
+        const apicall = this.page.waitForResponse(response=>
+            response.url().includes('/unauthorized')
+        )
+        await this.page.locator(this.unauth).click();
         const response = await apicall;
         return response;
     }
