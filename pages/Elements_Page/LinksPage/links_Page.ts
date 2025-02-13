@@ -12,8 +12,11 @@ class Links{
     private badRequest:string;
     private unauth:string;
     private linkResponse:string;
+    private forbidden:string;
+
     constructor(page:Page){
         this.page = page;
+        this.forbidden='a#forbidden';
         this.linkResponse='p#linkResponse';
         this.unauth='a#unauthorized';
         this.badRequest='a#bad-request';
@@ -21,7 +24,7 @@ class Links{
         this.movedLink='a#moved';
         this.createLink='a#created';
         this.homeSimpleLink='a#simpleLink';
-        this.homeDynamicLink='a#dynamicLink'
+        this.homeDynamicLink='a#dynamicLink';
         this.elementActions = new ElementActions();
     }
 
@@ -116,6 +119,16 @@ class Links{
         const response = await apicall;
         return response;
     }
+
+    async forbiddenCall(){
+        const apicall = this.page.waitForResponse(response=>
+            response.url().includes('/forbidden')
+        )
+        await this.page.locator(this.forbidden).click();
+        const response = await apicall;
+        return response;
+    }
+
 
     async verifyResponseLinkData():Promise<string>{
         const data = await this.page.locator(this.linkResponse).textContent();
