@@ -3,7 +3,7 @@ import { Element } from '../pages/Elements_Page/navigate_to_element';
 import { Links } from '../pages/Elements_Page/LinksPage/links_Page';
 import { data } from '../pages/data/data';
 import {config} from '../config';
-import { hostname } from 'os';
+
 
 test.describe('@linksPage - tests to verify links page',()=>{
     let elementPage:Element;
@@ -70,5 +70,23 @@ test.describe('@linksPage - tests to verify links page',()=>{
         expect(response.statusText()).toContain('Moved Permanently');
     })
 
+    test('@badRequest - action bad request link and verify the response',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToLinksPage();
+        expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
+        const response = await linksPage.badRequestCall();
+        expect(response.status()).toBe(400);
+        expect(response.request().method()).toBe('GET');
+        expect(response.statusText()).toContain('Bad Request');
+    })
 
+    test('@unauthorized - action unauthorized link and verify the response',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToLinksPage();
+        expect(await linksPage.verifyLinksPage()).toContain(data['links page']);
+        const response = await linksPage.unauthorizedCall();
+        expect(response.status()).toBe(401);
+        expect(response.request().method()).toBe('GET');
+        expect(response.statusText()).toContain('Unauthorized');
+    })
 })
