@@ -8,9 +8,11 @@ class Element{
     private webtablesPage:string;
     private buttonsPage:string;
     private linksPage:string;
+    private uploadDownloadPage:string;
     private page:Page;
     constructor(page:Page){
         this.page = page;
+        this.uploadDownloadPage ='.menu-list>#item-7';
         this.textboxpage='.menu-list>#item-0';
         this.checkboxPage='.menu-list>#item-1';
         this.webtablesPage = '.menu-list>#item-3';
@@ -94,6 +96,20 @@ class Element{
                 console.info('Navigation to links page, successfull!');
             }else{
                 throw new Error('Navigation to links page, unsuccessfull!');
+            }
+        }catch(err){
+            throw err;
+        }
+    }
+
+    async navigateToUploadDownload(){
+        try{
+            const links = await this.page.waitForSelector(this.uploadDownloadPage);
+            if(links){
+                await this.page.locator(this.uploadDownloadPage,{hasText:'Uploadand Download'}).click();
+                console.log('Navigation to upload and download page, successfull!');
+            }else{
+                throw new Error('Navigation to upload and download page, unsuccessfull!');
             }
         }catch(err){
             throw err;
