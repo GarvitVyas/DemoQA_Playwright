@@ -13,6 +13,7 @@ const data={
     'right click text':'You have done a right click',
     'dynamic click test':'You have done a dynamic click',
     'email-valid':/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+    'upload download':'upload-download'
 };
 
 const staticUser={
