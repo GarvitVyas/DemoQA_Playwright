@@ -21,9 +21,15 @@ test.describe('@uploaddownload - tests for upload and download page',()=>{
     test('@uploadImage - upload and verify uploaded',async({})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToUploadDownload();
-        await expect(uploadDownloadPage.verifyUploadDownload()).toContain(data['upload download']);
+        expect(await uploadDownloadPage.verifyUploadDownload()).toContain(data['upload download']);
 
+        //verify not uploaded initially
+        expect(await uploadDownloadPage.noUpload()).toBeFalsy();
+        //Upload the image
         await uploadDownloadPage.uploadImage();
-        await uploadDownloadPage.noUpload();
+        //verify a image is uploaded
+        expect(await uploadDownloadPage.noUpload()).toBeTruthy();   
+        //verify the name of the image is in the path
+        expect(await uploadDownloadPage.uploadPath()).toContain('download.png');     
     })
 })
