@@ -106,7 +106,7 @@ class Element{
         try{
             const links = await this.page.waitForSelector(this.uploadDownloadPage);
             if(links){
-                await this.page.locator(this.uploadDownloadPage,{hasText:'Uploadand Download'}).click();
+                await this.page.locator(this.uploadDownloadPage,{hasText:'Upload and Download'}).click();
                 console.log('Navigation to upload and download page, successfull!');
             }else{
                 throw new Error('Navigation to upload and download page, unsuccessfull!');
