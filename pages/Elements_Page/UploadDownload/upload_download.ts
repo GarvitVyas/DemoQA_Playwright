@@ -52,19 +52,14 @@ class UploadDownload{
     }
     async downloading(){
         const download = await this.page.locator(this.downloadCTA);
-       // await download.click();
-       //set download path
-        const downloadPath = path.resolve('pages/data/downloads');
-        
-        //check if download path exist or create it 
-        if(!fs.existsSync(downloadPath)){
-            fs.mkdirSync(downloadPath);
-        }
-        
         const [downloaded] = await Promise.all([
             this.page.waitForEvent('download'),
             download.click()
         ])
+        //get it saved so when the context closes the file is not removed
+        const filename = await downloaded.suggestedFilename();
+        await downloaded.saveAs(filename);
+        return filename;
     }
 
 }
