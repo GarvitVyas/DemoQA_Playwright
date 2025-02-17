@@ -1,18 +1,20 @@
 import {Page} from '@playwright/test';
 import { ElementActions } from '../../data/utils/action_utils';
 import path from 'path';
+import fs from 'fs';
 
 class UploadDownload{
     private page:Page;
     private elementActions : ElementActions;
     private uploadFile:string;
     private uploadedPath:string;
+    private downloadCTA:string;
     constructor(page:Page){
         this.page = page;
         this.elementActions=new ElementActions;
         this.uploadedPath='p#uploadedFilePath';
         this.uploadFile='input#uploadFile';
-
+        this.downloadCTA='a#downloadButton';
     }
 
     async verifyUploadDownload(){
@@ -43,5 +45,27 @@ class UploadDownload{
             throw new Error('Upload unsuccessfull, button not found');
         }
     }
+
+    async verifyDownloadCTA(){
+        const cta = await this.page.locator(this.downloadCTA,{hasText:'Download'});
+        return await this.elementActions.visibilityCheck(cta) ? true : false;
+    }
+    async downloading(){
+        const download = await this.page.locator(this.downloadCTA);
+       // await download.click();
+       //set download path
+        const downloadPath = path.resolve('pages/data/downloads');
+        
+        //check if download path exist or create it 
+        if(!fs.existsSync(downloadPath)){
+            fs.mkdirSync(downloadPath);
+        }
+        
+        const [downloaded] = await Promise.all([
+            this.page.waitForEvent('download'),
+            download.click()
+        ])
+    }
+
 }
 export {UploadDownload};
