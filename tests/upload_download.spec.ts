@@ -32,4 +32,14 @@ test.describe('@uploaddownload - tests for upload and download page',()=>{
         //verify the name of the image is in the path
         expect(await uploadDownloadPage.uploadPath()).toContain('download.png');     
     })
+
+    test('@downloadImage - download image and verify downloaded',async({})=>{
+        await elementPage.navigateToElementPage();
+        await elementPage.navigateToUploadDownload();
+        expect(await uploadDownloadPage.verifyUploadDownload()).toContain(data['upload download']);
+        //verify download cta visible and has text download
+        expect(await uploadDownloadPage.verifyDownloadCTA()).toBeTruthy();
+        const fileDownload = await uploadDownloadPage.downloading();
+        expect(fileDownload).toBe('sampleFile.jpeg');
+    })
 })
