@@ -7,8 +7,11 @@ import { RadioButton } from './pages/Elements_Page/RadioButtonPage/radioButton_P
 import { Links } from './pages/Elements_Page/LinksPage/links_Page';
 import { CheckBox } from './pages/Elements_Page/CheckBoxPage/checkBox_Page';
 import { Buttons } from './pages/Elements_Page/ButtonsPage/buttons_Page';
+import { DynamicProperties } from './pages/Elements_Page/DynamicProperties/dynamic_Properties';
+
 type myfixture={
     elementPage:Element;
+    dynamicPropertiesPage:DynamicProperties;
     uploadDownloadPage:UploadDownload;
     webtablePage:WebTables;
     textboxPage:TextBox;
@@ -50,6 +53,10 @@ export const test = base.extend<myfixture>({
     radiobuttonPage:async({page},use)=>{
         const radiobuttonPage = new RadioButton(page);
         use(radiobuttonPage);
+    },
+    dynamicPropertiesPage:async({page},use)=>{
+        const dynamicPropertiesPage = new DynamicProperties(page);
+        use(dynamicPropertiesPage);
     }
 })
 
