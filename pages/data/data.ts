@@ -14,7 +14,9 @@ const data={
     'dynamic click test':'You have done a dynamic click',
     'email-valid':/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
     'upload download':'upload-download',
-    'dynamic properties':'dynamic-properties'
+    'dynamic properties':'dynamic-properties',
+    'white text':'rgb(255, 255, 255)',
+    'red text':'rgb(220, 53, 69)'
 };
 
 const staticUser={
