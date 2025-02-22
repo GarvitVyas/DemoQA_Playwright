@@ -1,24 +1,19 @@
-import {test,expect} from '@playwright/test';
-import { Buttons } from '../pages/Elements_Page/ButtonsPage/buttons_Page';
-import { Element } from '../pages/Elements_Page/navigate_to_element';
+import {test,expect} from '../base';
 import { data } from '../pages/data/data';
 
 test.describe('@buttons - verify the different buttons',()=>{
-    let elementPage:Element;
-    let buttonsPage:Buttons;
+
 
     test.beforeEach(async({page})=>{
         try{
             await page.goto('/');
-            elementPage = new Element(page);
-            buttonsPage = new Buttons(page);
         }catch(err){
             console.info('Issue with before each hook'+err);
             throw err;
         }
     })
 
-    test('@actionDoubleBTN - verify the double click button',async()=>{
+    test('@actionDoubleBTN - verify the double click button',async({elementPage, buttonsPage})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToButtonsPage();
         expect(await buttonsPage.verifyButtonPage()).toContain(data['buttonsPage']);
@@ -29,7 +24,7 @@ test.describe('@buttons - verify the different buttons',()=>{
         expect(await buttonsPage.verifyDoubleClick()).toContain('double click');
     })
 
-    test('@actionRightBTN - verify the right click button',async()=>{
+    test('@actionRightBTN - verify the right click button',async({elementPage,buttonsPage})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToButtonsPage();
         expect(await buttonsPage.verifyButtonPage()).toContain(data['buttonsPage']);
@@ -40,7 +35,7 @@ test.describe('@buttons - verify the different buttons',()=>{
         expect(await buttonsPage.verifyRightClick()).toContain('right click');
     })
 
-    test('@actionDynamicBTN - verify the dynamic click button',async()=>{
+    test('@actionDynamicBTN - verify the dynamic click button',async({elementPage,buttonsPage})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToButtonsPage();
         expect(await buttonsPage.verifyButtonPage()).toContain(data['buttonsPage']);
@@ -51,7 +46,7 @@ test.describe('@buttons - verify the different buttons',()=>{
         expect(await buttonsPage.verifyDynamicClick()).toContain('dynamic click');
     })
 
-    test('@actionAll - verify on actioning all the buttons',async()=>{
+    test('@actionAll - verify on actioning all the buttons',async({elementPage,buttonsPage})=>{
         await elementPage.navigateToElementPage();
         await elementPage.navigateToButtonsPage();
         expect(await buttonsPage.verifyButtonPage()).toContain(data['buttonsPage']);
