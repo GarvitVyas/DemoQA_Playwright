@@ -9,9 +9,11 @@ class Element{
     private buttonsPage:string;
     private linksPage:string;
     private uploadDownloadPage:string;
+    private dynamicPropertiesPage:string;
     private page:Page;
     constructor(page:Page){
         this.page = page;
+        this.dynamicPropertiesPage='.menu-list>#item-8';
         this.uploadDownloadPage ='.menu-list>#item-7';
         this.textboxpage='.menu-list>#item-0';
         this.checkboxPage='.menu-list>#item-1';
@@ -110,6 +112,20 @@ class Element{
                 console.log('Navigation to upload and download page, successfull!');
             }else{
                 throw new Error('Navigation to upload and download page, unsuccessfull!');
+            }
+        }catch(err){
+            throw err;
+        }
+    }
+
+    async navigateToDynamicProperties(){
+        try{
+            const links = await this.page.waitForSelector(this.dynamicPropertiesPage);
+            if(links){
+                await this.page.locator(this.dynamicPropertiesPage,{hasText:'Dynamic Properties'}).click();
+                console.log('Navigation to dynamic properties page, successfull!');
+            }else{
+                throw new Error('Navigation to dynamic properties page, unsuccessfull!');
             }
         }catch(err){
             throw err;
