@@ -1,7 +1,7 @@
 import {Page} from '@playwright/test';
 import { ElementActions } from '../../data/utils/action_utils';
 import path from 'path';
-import fs from 'fs';
+
 
 class UploadDownload{
     private page:Page;
@@ -64,3 +64,4 @@ class UploadDownload{
 
 }
 export {UploadDownload};
+
