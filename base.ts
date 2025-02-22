@@ -8,9 +8,11 @@ import { Links } from './pages/Elements_Page/LinksPage/links_Page';
 import { CheckBox } from './pages/Elements_Page/CheckBoxPage/checkBox_Page';
 import { Buttons } from './pages/Elements_Page/ButtonsPage/buttons_Page';
 import { DynamicProperties } from './pages/Elements_Page/DynamicProperties/dynamic_Properties';
+import { Forms } from './pages/Froms_Page/navigate_to_forms';
 
 type myfixture={
     elementPage:Element;
+    formsPage:Forms;
     dynamicPropertiesPage:DynamicProperties;
     uploadDownloadPage:UploadDownload;
     webtablePage:WebTables;
@@ -25,6 +27,10 @@ export const test = base.extend<myfixture>({
     elementPage: async({page},use)=>{
         const elementPage = new Element(page);
         use(elementPage);
+    },
+    formsPage:async({page},use)=>{
+        const formsPage = new Forms(page);
+        use(formsPage);
     },
     buttonsPage:async({page},use)=>{
         const buttonsPage = new Buttons(page);
