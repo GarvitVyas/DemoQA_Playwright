@@ -58,6 +58,13 @@ class ElementActions{
         await locator.dblclick();
     }
 
+    async dateFormat(){
+        const cdate = new Date();
+        const day = cdate.getDate();
+        const month = cdate.toLocaleString('default',{month:'short'});
+        const year = cdate.getFullYear();
+        return `${day} ${month} ${year}`;
+    }
 
 }
 
