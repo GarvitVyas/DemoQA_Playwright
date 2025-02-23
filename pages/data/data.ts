@@ -16,7 +16,9 @@ const data={
     'upload download':'upload-download',
     'dynamic properties':'dynamic-properties',
     'white text':'rgb(255, 255, 255)',
-    'red text':'rgb(220, 53, 69)'
+    'red text':'rgb(220, 53, 69)',
+    'practice form page':'automation-practice-form',
+    'froms title':'Student Registration Form'
 };
 
 const staticUser={
