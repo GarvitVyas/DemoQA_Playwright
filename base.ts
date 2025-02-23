@@ -9,10 +9,12 @@ import { CheckBox } from './pages/Elements_Page/CheckBoxPage/checkBox_Page';
 import { Buttons } from './pages/Elements_Page/ButtonsPage/buttons_Page';
 import { DynamicProperties } from './pages/Elements_Page/DynamicProperties/dynamic_Properties';
 import { Forms } from './pages/Froms_Page/navigate_to_forms';
+import { PracticeForm } from './pages/Froms_Page/PracticeForms/practiceForms';
 
 type myfixture={
     elementPage:Element;
     formsPage:Forms;
+    practiceFormPage:PracticeForm;
     dynamicPropertiesPage:DynamicProperties;
     uploadDownloadPage:UploadDownload;
     webtablePage:WebTables;
@@ -31,6 +33,10 @@ export const test = base.extend<myfixture>({
     formsPage:async({page},use)=>{
         const formsPage = new Forms(page);
         use(formsPage);
+    },
+    practiceFormPage:async({page},use)=>{
+        const practiceFormPage = new PracticeForm(page);
+        use(practiceFormPage);
     },
     buttonsPage:async({page},use)=>{
         const buttonsPage = new Buttons(page);
