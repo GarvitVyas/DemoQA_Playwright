@@ -20,7 +20,7 @@ class Forms{
             }
     }
 
-    async navigateToFormsPage(){
+    async navigateToPracticeFormsPage(){
          try{
             const flag = await this.page.waitForSelector(this.practiceForm);
             if(flag){
