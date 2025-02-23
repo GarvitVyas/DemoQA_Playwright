@@ -1,5 +1,6 @@
 import {Page} from '@playwright/test';
 
+
 class Forms{
     private page:Page;
     private forms:string;
@@ -22,7 +23,8 @@ class Forms{
 
     async navigateToPracticeFormsPage(){
          try{
-            const flag = await this.page.waitForSelector(this.practiceForm);
+            const selector = await this.page.locator(this.practiceForm).nth(2);
+            const flag = await selector;
             if(flag){
                 await this.page.locator(this.practiceForm,{hasText:'Practice Form'}).click();
                 console.log('Navigation to practice form page, successfull!');
