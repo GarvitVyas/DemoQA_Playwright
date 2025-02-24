@@ -56,6 +56,8 @@ test.describe('@PracticeForm - test to verify the practice automation form',()=>
         await practiceFormPage.fillGender('Female');
         //mobile
         await practiceFormPage.fillNumber(data['mobile']);
+        //dob
+        await practiceFormPage.fillDOB();
     })
 
 })
