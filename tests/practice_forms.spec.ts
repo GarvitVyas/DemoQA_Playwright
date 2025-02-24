@@ -1,5 +1,5 @@
 import {test,expect} from '../base';
-import { data } from '../pages/data/data';
+import { data, staticUser } from '../pages/data/data';
 
 
 test.describe('@PracticeForm - test to verify the practice automation form',()=>{
@@ -41,6 +41,21 @@ test.describe('@PracticeForm - test to verify the practice automation form',()=>
         //state
         expect(await fields['state'].innerText()).toBe('Select State');
         expect(await fields['city'].innerText()).toBe('Select City');
+    })
+
+    test('@fillFormData - verify the practice form after filling data',async({formsPage,practiceFormPage})=>{
+        await formsPage.navigateToForms();
+        await formsPage.navigateToPracticeFormsPage();
+
+        expect(await practiceFormPage.verifyPracticeForm()).toContain(data['practice form page']);
+        expect(await practiceFormPage.verifyFormTitle()).toBe(data['froms title']);
+
+        await practiceFormPage.fillName(staticUser['First Name'],staticUser['last Name']);
+        await practiceFormPage.fillEmail(staticUser['Email']);
+        //gender
+        await practiceFormPage.fillGender('Female');
+        //mobile
+        await practiceFormPage.fillNumber(data['mobile']);
     })
 
 })
