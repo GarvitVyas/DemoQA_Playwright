@@ -25,11 +25,14 @@ class PracticeForm{
     private selectState:string;
     private selectCity:string;
     private submitBTN:string;
+    private calender:string;
+    private calenderDetails:{[key:string]:string};
 
     constructor(page:Page){
         this.page = page;
         this.elementActions= new ElementActions;
         this.email='#userEmail';
+        this.calender='.react-datepicker';
         this.genderMale='//*[@id="gender-radio-1"]';
         this.genderFemale='//*[@id="gender-radio-2"]';
         this.genderOther='//*[@id="gender-radio-3"]';
@@ -49,6 +52,14 @@ class PracticeForm{
         this.selectState='//*[@id="react-select-3-input"]'; // suggestion list after clicking on input field
         this.selectCity='//*[@id="react-select-4-input"]'; //enabled after selecting state
         this.submitBTN='//*[@id="submit"]';
+        this.calenderDetails={
+            'next_month':'//button[text()="Next Month"]',
+            'previous_month':'//button[text()="Previous Month"]',
+            'month_list':'.react-datepicker__month-select',
+            'year_list':'.react-datepicker__year-select',
+            'date':'//*[@class="react-datepicker__month"]//div',
+            'header':'//*[@class="react-datepicker__header"]/div[1]'
+        }
     }
 
     async verifyPracticeForm(){
@@ -102,6 +113,24 @@ class PracticeForm{
 
     async fillNumber(number:string){
         await this.page.locator(this.mobileNumber).fill(number);
+    }
+
+    async fillDOB(){
+        await this.page.locator(this.dob).click();
+        const calender = await this.page.locator(this.calender).isVisible();
+        if(calender){
+            await this.page.locator(this.calenderDetails['month_list']).selectOption({value:'10'});
+            await this.page.locator(this.calenderDetails['year_list']).selectOption({value:'1998'}); 
+            const dates = await this.page.locator('//*[@class="react-datepicker__month"]/div[4]/div').all();
+            
+            for(let i =0;i<dates.length;i++){
+                const temp = await dates[i].textContent();
+                if(temp == '25'){
+                    await dates[i].click();
+                    break;
+                }
+            }
+        }else{throw new Error('Calender not visible!');}
     }
 
 
