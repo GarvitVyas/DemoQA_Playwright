@@ -85,8 +85,25 @@ class PracticeForm{
     async fillName(fname:string,lname:string){
         await this.page.locator(this.firstName).fill(fname);
         await this.page.locator(this.lastName).fill(lname);
-
     }
+    async fillEmail(email:string){
+        await this.page.locator(this.email).fill(email);
+    }
+
+    async fillGender(value:'male'|'Male'|'female'|'Female'|'Other'|'other'){
+        if(value == 'male' || value == 'Male'){
+            await this.page.getByText('Male').nth(1).click();
+        }else if(value == 'female' || value == 'Female'){
+            await this.page.getByText('Female').click();
+        }else if(value == 'other' || value == "Other"){
+            await this.page.getByText('Other').click(); 
+        }
+    }
+
+    async fillNumber(number:string){
+        await this.page.locator(this.mobileNumber).fill(number);
+    }
+
 
 }
 
