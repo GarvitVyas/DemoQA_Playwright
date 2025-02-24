@@ -18,7 +18,8 @@ const data={
     'white text':'rgb(255, 255, 255)',
     'red text':'rgb(220, 53, 69)',
     'practice form page':'automation-practice-form',
-    'froms title':'Student Registration Form'
+    'froms title':'Student Registration Form',
+    'mobile':'9827363432'
 };
 
 const staticUser={
