@@ -58,6 +58,8 @@ test.describe('@PracticeForm - test to verify the practice automation form',()=>
         await practiceFormPage.fillNumber(data['mobile']);
         //dob
         await practiceFormPage.fillDOB();
+        //Subject
+        await practiceFormPage.fillSubject();
     })
 
 })
