@@ -133,6 +133,20 @@ class PracticeForm{
         }else{throw new Error('Calender not visible!');}
     }
 
+    async fillSubject(){
+        await this.page.locator(this.subjects).fill('c');
+        await this.page.waitForSelector('//div[contains(@class,"-menu")]');
+        const chem = await this.page.getByText('Chemistry');
+
+        if(await chem.isVisible()){
+            await chem.click();
+        }else{
+            throw new Error('Subject suggestion list not available');
+        }
+    }
+
+   
+
 
 }
 
