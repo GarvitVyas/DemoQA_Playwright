@@ -60,6 +60,13 @@ test.describe('@PracticeForm - test to verify the practice automation form',()=>
         await practiceFormPage.fillDOB();
         //Subject
         await practiceFormPage.fillSubject();
+        //hobbie
+        await practiceFormPage.fillHobbies();
+        //upload image
+        await practiceFormPage.uploadImage();
+        //current address
+        await practiceFormPage.fillCurrentAddress();
+        
     })
 
 })
