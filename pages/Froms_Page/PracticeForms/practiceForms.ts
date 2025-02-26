@@ -1,6 +1,7 @@
 import {Page} from '@playwright/test';
 import { ElementActions } from '../../data/utils/action_utils';
-
+import path from 'path';
+import { data } from '../../data/data';
 class PracticeForm{
 
     private page:Page;
@@ -136,7 +137,7 @@ class PracticeForm{
     async fillSubject(){
         await this.page.locator(this.subjects).fill('c');
         await this.page.waitForSelector('//div[contains(@class,"-menu")]');
-        const chem = await this.page.getByText('Chemistry');
+        const chem = await this.page.getByText('chemistry');
 
         if(await chem.isVisible()){
             await chem.click();
@@ -145,6 +146,45 @@ class PracticeForm{
         }
     }
 
+    async fillHobbies(){
+        const reading = await this.page.getByText('Reading')
+        await reading.check();
+        if(!await reading.isChecked()){
+            throw new Error('Issue with selecting reading hobbie');
+        }
+        const sports = await this.page.getByText('Sports')
+        await sports.check();
+        if(!await sports.isChecked()){
+            throw new Error('Issue with selecting sports hobbie');
+        }
+    }
+
+    async uploadImage(){
+        const input = await this.page.locator(this.pictureUpload);
+        const file = path.resolve('pages/data/Image/download.png');
+        await input.setInputFiles(file);
+        return input;
+    }
+
+    async fillCurrentAddress(){
+        const cA = await this.page.locator(this.currentAddress);
+        await cA.fill(data['current-address']);
+        if(await cA.inputValue() == 'null'){
+            throw new Error('Issue with current address');
+        }
+    }
+
+    async fillStateAndCity(){
+        const flagState = await this.page.locator(this.selectState);
+        await flagState.click();
+        await this.page.waitForSelector('//div[contains(@class,"-menu")]');
+        await this.page.getByText('Rajasthan').click();
+
+        await this.page.locator(this.selectCity).click();
+        await this.page.waitForSelector('//div[contains(@class,"-menu")]');
+        await this.page.getByText('Jaipur').click();
+
+    }
    
 
 
