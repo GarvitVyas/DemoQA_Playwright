@@ -26,13 +26,17 @@ class PracticeForm{
     private selectState:string;
     private selectCity:string;
     private submitBTN:string;
+    private statelist:string;
+    private citylist:string;
     private calender:string;
+    private resultScreen:string;
     private calenderDetails:{[key:string]:string};
 
     constructor(page:Page){
         this.page = page;
         this.elementActions= new ElementActions;
         this.email='#userEmail';
+        this.resultScreen='.modal-content';
         this.calender='.react-datepicker';
         this.genderMale='//*[@id="gender-radio-1"]';
         this.genderFemale='//*[@id="gender-radio-2"]';
@@ -50,8 +54,10 @@ class PracticeForm{
         this.musicHobbie='//*[@id="hobbies-checkbox-3"]'; // value 3
         this.pictureUpload='//*[@id="uploadPicture"]';
         this.currentAddress='//*[@id="currentAddress"]';
-        this.selectState='//*[@id="react-select-3-input"]'; // suggestion list after clicking on input field
-        this.selectCity='//*[@id="react-select-4-input"]'; //enabled after selecting state
+        this.selectState='//*[@class=" css-1hwfws3"]'; 
+        this.statelist = '//div[contains(@class,"-menu")]';
+        this.selectCity='//*[@class=" css-1hwfws3"]'; //enabled after selecting state
+        this.citylist = '//div[contains(@class,"-menu")]';
         this.submitBTN='//*[@id="submit"]';
         this.calenderDetails={
             'next_month':'//button[text()="Next Month"]',
@@ -175,15 +181,26 @@ class PracticeForm{
     }
 
     async fillStateAndCity(){
-        const flagState = await this.page.locator(this.selectState);
+        const flagState = await this.page.locator(this.selectState).first();
         await flagState.click();
-        await this.page.waitForSelector('//div[contains(@class,"-menu")]');
+        await this.page.waitForSelector(this.statelist);
         await this.page.getByText('Rajasthan').click();
+        
+        const city = await this.page.locator(this.selectCity).nth(1);
+        if(await city.isEditable()){
+            await city.click();
+            await this.page.waitForSelector(this.citylist);
+            await this.page.getByText('Jaipur',{exact:true}).click();
+        }
+    }
 
-        await this.page.locator(this.selectCity).click();
-        await this.page.waitForSelector('//div[contains(@class,"-menu")]');
-        await this.page.getByText('Jaipur').click();
+    async actionSubmit(){
+        await this.page.locator(this.submitBTN,{hasText:'Submit'}).click();
+    }
 
+    async verifyResultScreen():Promise<boolean>{
+        const screen = await this.page.locator(this.resultScreen);
+        return await this.elementActions.visibilityCheck(screen);
     }
    
 
