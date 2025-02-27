@@ -66,7 +66,10 @@ test.describe('@PracticeForm - test to verify the practice automation form',()=>
         await practiceFormPage.uploadImage();
         //current address
         await practiceFormPage.fillCurrentAddress();
-        
+        //state and city
+        await practiceFormPage.fillStateAndCity();
+        await practiceFormPage.actionSubmit();
+        expect(await practiceFormPage.verifyResultScreen()).toBeTruthy();
     })
 
 })
