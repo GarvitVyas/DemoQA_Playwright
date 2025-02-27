@@ -70,6 +70,20 @@ test.describe('@PracticeForm - test to verify the practice automation form',()=>
         await practiceFormPage.fillStateAndCity();
         await practiceFormPage.actionSubmit();
         expect(await practiceFormPage.verifyResultScreen()).toBeTruthy();
+
+        const resultData = await practiceFormPage.resultData();
+        expect(resultData['Student Name']).toBe(staticUser['First Name']+' '+staticUser['last Name']);
+        expect(resultData['Student Email']).toBe(staticUser['Email']);
+        expect(resultData['Gender']).toBe('Female');
+        expect(resultData['Mobile']).toBe(data['mobile']);
+        expect(resultData['Date of Birth']).toBe('25 November,1998');
+        expect(resultData['Subjects']).toBe('Chemistry');
+        expect(resultData['Hobbies']).toContain('Reading');
+        expect(resultData['Hobbies']).toContain('Sports');
+        expect(resultData['Picture']).toBe('download.png');
+        expect(resultData['Address']).toBe(data['current-address']);
+        expect(resultData['State and City']).toContain('Rajasthan');
+        expect(resultData['State and City']).toContain('Jaipur');
     })
 
 })
