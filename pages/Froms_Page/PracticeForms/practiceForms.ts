@@ -202,6 +202,18 @@ class PracticeForm{
         const screen = await this.page.locator(this.resultScreen);
         return await this.elementActions.visibilityCheck(screen);
     }
+
+    async resultData(){
+        const details:{[key:string]:string}={};
+        const labels = await this.page.locator('tbody>tr>td:nth-child(1)').allTextContents();
+        const values = await this.page.locator('tbody>tr>td:nth-child(2)').allTextContents();
+
+        labels.forEach((key,val)=>{
+            details[key] = values[val]
+        })
+
+        return details;
+    }
    
 
 
