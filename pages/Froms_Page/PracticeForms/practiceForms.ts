@@ -30,6 +30,7 @@ class PracticeForm{
     private citylist:string;
     private calender:string;
     private resultScreen:string;
+    private closeResultScreen:string;
     private calenderDetails:{[key:string]:string};
 
     constructor(page:Page){
@@ -49,9 +50,9 @@ class PracticeForm{
         this.dob='#dateOfBirthInput';
         this.subjects='#subjectsInput'; //suggestion list
         this.hobbiesLabel='//*[@id="hobbiesWrapper"]/div[2]/div'; //check boxes
-        this.sportHobbie='//*[@id="hobbies-checkbox-1"]';//value 1
-        this.readingHobbie='//*[@id="hobbies-checkbox-2"]';// value 2
-        this.musicHobbie='//*[@id="hobbies-checkbox-3"]'; // value 3
+        this.sportHobbie='Sports';//value 1
+        this.readingHobbie='Reading';// value 2
+        this.musicHobbie='Music'; // value 3
         this.pictureUpload='//*[@id="uploadPicture"]';
         this.currentAddress='//*[@id="currentAddress"]';
         this.selectState='//*[@class=" css-1hwfws3"]'; 
@@ -59,6 +60,7 @@ class PracticeForm{
         this.selectCity='//*[@class=" css-1hwfws3"]'; //enabled after selecting state
         this.citylist = '//div[contains(@class,"-menu")]';
         this.submitBTN='//*[@id="submit"]';
+        this.closeResultScreen='#closeLargeModal';
         this.calenderDetails={
             'next_month':'//button[text()="Next Month"]',
             'previous_month':'//button[text()="Previous Month"]',
@@ -101,25 +103,54 @@ class PracticeForm{
 
     //fill name
     async fillName(fname:string,lname:string){
-        await this.page.locator(this.firstName).fill(fname);
-        await this.page.locator(this.lastName).fill(lname);
+        const firstname=await this.page.locator(this.firstName)
+        await firstname.fill(fname);
+        const lastname=await this.page.locator(this.lastName)
+        await lastname.fill(lname);
+        return [firstname,lastname];
     }
+
+    async nameFields(){
+        const firstname=await this.page.locator(this.firstName);
+        const lastname=await this.page.locator(this.lastName);
+        return [firstname,lastname];
+    }
+
     async fillEmail(email:string){
-        await this.page.locator(this.email).fill(email);
+        const emailId = await this.page.locator(this.email)
+        await emailId.fill(email);
+        return emailId;
     }
 
     async fillGender(value:'male'|'Male'|'female'|'Female'|'Other'|'other'){
+        let male = await this.page.getByText('Male').nth(1);
+        const female = await this.page.getByText('Female');
+        const others = await this.page.getByText('Other');
         if(value == 'male' || value == 'Male'){
-            await this.page.getByText('Male').nth(1).click();
-        }else if(value == 'female' || value == 'Female'){
-            await this.page.getByText('Female').click();
+            await male.click();
+        }else if(value == 'female' || value == 'Female'){   
+            await female.click();
         }else if(value == 'other' || value == "Other"){
-            await this.page.getByText('Other').click(); 
+            await others.click(); 
         }
+        
+    }
+    async genders(){
+        let male = await this.page.getByText('Male').nth(1);
+        const female = await this.page.getByText('Female');
+        const others = await this.page.getByText('Other');
+        return [male,female,others];
     }
 
     async fillNumber(number:string){
-        await this.page.locator(this.mobileNumber).fill(number);
+        const moilenumber = await this.page.locator(this.mobileNumber);
+        await moilenumber.fill(number);
+        
+    }
+
+    async mobile(){
+        const moilenumber = await this.page.locator(this.mobileNumber);
+        return moilenumber;
     }
 
     async fillDOB(){
@@ -141,7 +172,8 @@ class PracticeForm{
     }
 
     async fillSubject(){
-        await this.page.locator(this.subjects).fill('c');
+        const sub = await this.page.locator(this.subjects);
+        await sub.fill('c');
         await this.page.waitForSelector('//div[contains(@class,"-menu")]');
         const chem = await this.page.getByText('chemistry');
 
@@ -150,15 +182,16 @@ class PracticeForm{
         }else{
             throw new Error('Subject suggestion list not available');
         }
+        return sub;
     }
 
     async fillHobbies(){
-        const reading = await this.page.getByText('Reading')
+        const reading = await this.page.getByText(this.readingHobbie);
         await reading.check();
         if(!await reading.isChecked()){
             throw new Error('Issue with selecting reading hobbie');
         }
-        const sports = await this.page.getByText('Sports')
+        const sports = await this.page.getByText(this.sportHobbie);
         await sports.check();
         if(!await sports.isChecked()){
             throw new Error('Issue with selecting sports hobbie');
@@ -214,9 +247,11 @@ class PracticeForm{
 
         return details;
     }
-   
 
-
-}
-
-export{PracticeForm};
+    async closeResult(){
+        const flag = await this.elementActions.visibilityCheck(this.page.locator(this.closeResultScreen));
+        if(flag){
+            await this.page.locator(this.closeResultScreen,{hasText:'Close'}).click();
+        }
+    }
+}export{PracticeForm};
