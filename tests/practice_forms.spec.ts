@@ -1,7 +1,6 @@
 import {test,expect} from '../base';
 import { data, staticUser } from '../pages/data/data';
 
-
 test.describe('@PracticeForm - test to verify the practice automation form',()=>{
 
     test.beforeEach(async({page})=>{
@@ -84,6 +83,39 @@ test.describe('@PracticeForm - test to verify the practice automation form',()=>
         expect(resultData['Address']).toBe(data['current-address']);
         expect(resultData['State and City']).toContain('Rajasthan');
         expect(resultData['State and City']).toContain('Jaipur');
+    })
+
+    test('@emptyAfterSubmit - verify after submit the form and closing the form window, refresh the fields',async({formsPage,practiceFormPage})=>{
+        await formsPage.navigateToForms();
+        await formsPage.navigateToPracticeFormsPage();
+        expect(await practiceFormPage.verifyPracticeForm()).toContain(data['practice form page']);
+        expect(await practiceFormPage.verifyFormTitle()).toBe(data['froms title']);
+        await practiceFormPage.fillName(staticUser['First Name'],staticUser['last Name']);
+        await practiceFormPage.fillEmail(staticUser['Email']);
+        await practiceFormPage.fillGender('Female');
+        await practiceFormPage.fillNumber(data['mobile']);
+        await practiceFormPage.fillDOB();
+        await practiceFormPage.fillSubject();
+        await practiceFormPage.fillHobbies();
+        await practiceFormPage.uploadImage();
+        await practiceFormPage.fillCurrentAddress();
+        await practiceFormPage.fillStateAndCity();
+        await practiceFormPage.actionSubmit();
+        expect(await practiceFormPage.verifyResultScreen()).toBeTruthy();
+        
+        await practiceFormPage.closeResult();
+
+        const name = await practiceFormPage.nameFields();
+        expect(await name[0]).toBeEmpty();
+        expect(await name[1]).toBeEmpty();
+
+        const gender = await practiceFormPage.genders();
+        expect(await gender[0]).not.toBeChecked();
+        expect(await gender[1]).not.toBeChecked();
+        expect(await gender[2]).not.toBeChecked();
+
+        const mobile = await practiceFormPage.mobile();
+        expect(await mobile).toBeEmpty();
     })
 
 })
