@@ -20,7 +20,9 @@ const data={
     'red text':'rgb(220, 53, 69)',
     'practice form page':'automation-practice-form',
     'froms title':'Student Registration Form',
-    'mobile':'9827363432'
+    'mobile':'9827363432',
+    'sample-page':'This is a sample page',
+    'new window message':'Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.'
 };
 
 const staticUser={
