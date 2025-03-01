@@ -10,6 +10,8 @@ import { Buttons } from './pages/Elements_Page/ButtonsPage/buttons_Page';
 import { DynamicProperties } from './pages/Elements_Page/DynamicProperties/dynamic_Properties';
 import { Forms } from './pages/Froms_Page/navigate_to_forms';
 import { PracticeForm } from './pages/Froms_Page/PracticeForms/practiceForms';
+import { AlertsPage } from './pages/Alerts_Page/navigate_to_alerts';
+import { BrowserWindows } from './pages/Alerts_Page/BrowserWindowsPage/browserWindows_page';
 
 type myfixture={
     elementPage:Element;
@@ -23,12 +25,22 @@ type myfixture={
     linksPage:Links;
     checkboxPage:CheckBox;
     buttonsPage:Buttons;
+    alertsPage:AlertsPage;
+    browserWindows:BrowserWindows;
 }
 
 export const test = base.extend<myfixture>({
     elementPage: async({page},use)=>{
         const elementPage = new Element(page);
         use(elementPage);
+    },
+    browserWindows:async({page},use)=>{
+        const browserWindows = new BrowserWindows(page);
+        use(browserWindows);
+    },
+    alertsPage:async({page},use)=>{
+        const alertPage = new AlertsPage(page);
+        use(alertPage);
     },
     formsPage:async({page},use)=>{
         const formsPage = new Forms(page);
