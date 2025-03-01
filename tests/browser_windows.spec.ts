@@ -19,7 +19,26 @@ test.describe('@browserWindows- tests for browser windows elements',()=>{
 
         const newtab = await browserWindows.newTab();
         expect(await newtab[0]).toContain('sample');
-        expect(await newtab[1]).toBe('This is a sample page');
+        expect(await newtab[1]).toBe(data['sample-page']);
+    })
+
+    test('@newWindow - verify the new window functionality',async({alertsPage,browserWindows})=>{
+        await alertsPage.navigateToAlertPage();
+        await alertsPage.navigateToWindows();
+        expect(await browserWindows.verifyBrowserWindowsPage()).toContain(data['browser windows']);
+
+        const newwindow = await browserWindows.newWindow();
+        expect(await newwindow[0]).toContain('sample');
+        expect(await newwindow[1]).toBe(data['sample-page']);
+    })
+
+    test('@newWindowMessage - verify the new window message functionality',async({alertsPage,browserWindows})=>{
+        await alertsPage.navigateToAlertPage();
+        await alertsPage.navigateToWindows();
+        expect(await browserWindows.verifyBrowserWindowsPage()).toContain(data['browser windows']);
+
+        const newWindowMessage = await browserWindows.newWindowMessage();
+        expect(await newWindowMessage).toBe(data['new window message']);
     })
 
 })
