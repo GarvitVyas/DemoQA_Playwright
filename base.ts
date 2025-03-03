@@ -12,6 +12,7 @@ import { Forms } from './pages/Froms_Page/navigate_to_forms';
 import { PracticeForm } from './pages/Froms_Page/PracticeForms/practiceForms';
 import { AlertsPage } from './pages/Alerts_Page/navigate_to_alerts';
 import { BrowserWindows } from './pages/Alerts_Page/BrowserWindowsPage/browserWindows_page';
+import { Alerts } from './pages/Alerts_Page/AlertsPage/alerts_page';
 
 type myfixture={
     elementPage:Element;
@@ -27,6 +28,7 @@ type myfixture={
     buttonsPage:Buttons;
     alertsPage:AlertsPage;
     browserWindows:BrowserWindows;
+    alert:Alerts;
 }
 
 export const test = base.extend<myfixture>({
@@ -37,6 +39,10 @@ export const test = base.extend<myfixture>({
     browserWindows:async({page},use)=>{
         const browserWindows = new BrowserWindows(page);
         use(browserWindows);
+    },
+    alert:async({page},use)=>{
+        const alert = new Alerts(page);
+        use(alert);
     },
     alertsPage:async({page},use)=>{
         const alertPage = new AlertsPage(page);
