@@ -31,4 +31,26 @@ test.describe('@alerts - verify all alerts',()=>{
         expect(alertDetails[1]).toBe('alert');
     })
 
+    test('@confirmationAlert - verify the alert after confirmation',async({alert,alertsPage})=>{
+        await alertsPage.navigateToAlertPage();
+        await alertsPage.navigateToAlerts();
+        expect(await alert.verifyAlertsPage()).toContain(data['alert page']);
+        
+        let {msg,type,result}  = await alert.confirmThirdAlert();
+         expect(msg).toBe('Do you confirm action?');
+         expect(type).toBe('confirm');
+         expect(result).toContain('Ok');
+    })
+
+    test('@dismissAlert - verify the alert after dismissing',async({alert,alertsPage})=>{
+        await alertsPage.navigateToAlertPage();
+        await alertsPage.navigateToAlerts();
+        expect(await alert.verifyAlertsPage()).toContain(data['alert page']);
+        
+        let {msg,type,result}  = await alert.dismisThirdAlert();
+         expect(msg).toBe('Do you confirm action?');
+         expect(type).toBe('confirm');
+         expect(result).toContain('Cancel');
+    })
+
 })
