@@ -1,4 +1,4 @@
-import {Dialog, Page} from '@playwright/test';
+import {Page} from '@playwright/test';
 
 class Alerts{
     private page:Page;
@@ -6,8 +6,12 @@ class Alerts{
     private salert:string;
     private talert:string;
     private tresult :string;
+    private fourthalert:string;
+    private fourthresult:string;
     constructor(page:Page){
         this.page = page;
+        this.fourthresult='//*[@id="promptResult"]';
+        this.fourthalert='//*[@id="promtButton"]';
         this.tresult='//*[@id="confirmResult"]';
         this.talert='//*[@id="confirmButton"]';
         this.falert='//*[@id="alertButton"]';
@@ -75,6 +79,56 @@ class Alerts{
             this.page.locator(this.talert).click();
         })
     }
-     
+
+    async emptyFourthAlert(){
+        return new Promise<{msg:string,type:string,result:boolean}>((resolve,reject)=>{
+            this.page.on('dialog',async(res)=>{
+                try{
+                    res.accept();
+                    let msg = await res.message();
+                    let type = await res.type();
+                    let result = await this.page.locator(this.fourthresult).isVisible();
+                    resolve({msg,type,result})
+            }catch(err){
+                reject(err);
+                }
+        })
+            this.page.locator(this.fourthalert).click();
+            })
+    }
+    
+    async dismissFourthAlert(){
+        return new Promise<{msg:string,type:string,result:boolean}>((resolve,reject)=>{
+            this.page.on('dialog',async(res)=>{
+                try{
+                    res.dismiss();
+                    let msg = await res.message();
+                    let type = await res.type();
+                    let result = await this.page.locator(this.fourthresult).isVisible();
+                    resolve({msg,type,result});
+                }catch(err){
+                    reject(err);
+                }
+            })
+            this.page.locator(this.fourthalert).click();
+        })
+    }
+
+    async valueFourthAlert(value:string){
+        return new Promise<{msg:string,type:string,result:string}>((resolve,reject)=>{
+            this.page.on('dialog',async(res)=>{
+                try{
+                    res.accept(value);
+                    let msg = await res.message();
+                    let type = await res.type();
+                    let result = await this.page.locator(this.fourthresult).innerText();
+                    resolve({msg,type,result});
+                }catch(err){
+                    reject(err);
+                }
+            })
+            this.page.locator(this.fourthalert).click();
+        })
+    }
     
 }export {Alerts};
