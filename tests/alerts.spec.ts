@@ -53,4 +53,37 @@ test.describe('@alerts - verify all alerts',()=>{
          expect(result).toContain('Cancel');
     })
 
+    test('@fourthAlertNoInput - verify the fourth alert, accept the alert without entering value',async({alert,alertsPage})=>{
+        await alertsPage.navigateToAlertPage();
+        await alertsPage.navigateToAlerts();
+        expect(await alert.verifyAlertsPage()).toContain(data['alert page']);
+
+        let {msg,type,result} = await alert.emptyFourthAlert();
+        expect(msg).toBe('Please enter your name');
+        expect(type).toBe('prompt');
+        expect(result).toBeFalsy();
+    })
+
+    test('@fourthAlertDismiss - verify the fourth alert, dismiss the alert without entering value',async({alert,alertsPage})=>{
+        await alertsPage.navigateToAlertPage();
+        await alertsPage.navigateToAlerts();
+        expect(await alert.verifyAlertsPage()).toContain(data['alert page']);
+
+        let {msg,type,result} = await alert.dismissFourthAlert();
+        expect(msg).toBe('Please enter your name');
+        expect(type).toBe('prompt');
+        expect(result).toBeFalsy();
+    })
+
+    test('@fourthAlertInput - verify the fourth alert, accept the alert with entering value',async({alert,alertsPage})=>{
+        await alertsPage.navigateToAlertPage();
+        await alertsPage.navigateToAlerts();
+        expect(await alert.verifyAlertsPage()).toContain(data['alert page']);
+
+        let {msg,type,result} = await alert.valueFourthAlert('Joe');
+        expect(msg).toBe('Please enter your name');
+        expect(type).toBe('prompt');
+        expect(result).toContain('Joe');
+    })
+
 })
