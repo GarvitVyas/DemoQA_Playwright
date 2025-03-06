@@ -13,10 +13,12 @@ import { PracticeForm } from './pages/Froms_Page/PracticeForms/practiceForms';
 import { AlertsPage } from './pages/Alerts_Page/navigate_to_alerts';
 import { BrowserWindows } from './pages/Alerts_Page/BrowserWindowsPage/browserWindows_page';
 import { Alerts } from './pages/Alerts_Page/AlertsPage/alerts_page';
+import { Frames } from './pages/Alerts_Page/FramesPage/frame_page';
 
 type myfixture={
     elementPage:Element;
     formsPage:Forms;
+    framesPage:Frames;
     practiceFormPage:PracticeForm;
     dynamicPropertiesPage:DynamicProperties;
     uploadDownloadPage:UploadDownload;
@@ -35,6 +37,10 @@ export const test = base.extend<myfixture>({
     elementPage: async({page},use)=>{
         const elementPage = new Element(page);
         use(elementPage);
+    },
+    framesPage:async({page},use)=>{
+        const framesPage = new Frames(page);
+        use(framesPage);
     },
     browserWindows:async({page},use)=>{
         const browserWindows = new BrowserWindows(page);
