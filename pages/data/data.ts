@@ -23,6 +23,7 @@ const data={
     'mobile':'9827363432',
     'alert page':'alerts',
     'sample-page':'This is a sample page',
+    'frames page':'frames',
     'new window message':'Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.'
 };
 
