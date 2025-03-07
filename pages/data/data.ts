@@ -24,6 +24,7 @@ const data={
     'alert page':'alerts',
     'sample-page':'This is a sample page',
     'frames page':'frames',
+    'nested frames':'nestedframes',
     'new window message':'Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.'
 };
 
