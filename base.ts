@@ -14,6 +14,7 @@ import { AlertsPage } from './pages/Alerts_Page/navigate_to_alerts';
 import { BrowserWindows } from './pages/Alerts_Page/BrowserWindowsPage/browserWindows_page';
 import { Alerts } from './pages/Alerts_Page/AlertsPage/alerts_page';
 import { Frames } from './pages/Alerts_Page/FramesPage/frame_page';
+import { NestedFrames } from './pages/Alerts_Page/NesterFramesPage/nestedFrames_page';
 
 type myfixture={
     elementPage:Element;
@@ -31,12 +32,17 @@ type myfixture={
     alertsPage:AlertsPage;
     browserWindows:BrowserWindows;
     alert:Alerts;
+    nestedFrames:NestedFrames;
 }
 
 export const test = base.extend<myfixture>({
     elementPage: async({page},use)=>{
         const elementPage = new Element(page);
         use(elementPage);
+    },
+    nestedFrames:async({page},use)=>{
+        const nestedFrames = new NestedFrames(page);
+        use(nestedFrames);
     },
     framesPage:async({page},use)=>{
         const framesPage = new Frames(page);
