@@ -11,13 +11,22 @@ test.describe('@frames - tests for frames',()=>{
         }
     })
 
-    test('@firstFrame - verify the test mentioned in the frame',async({alertsPage,framesPage})=>{
+    test('@firstFrame - verify the text mentioned in the frame',async({alertsPage,framesPage})=>{
         await alertsPage.navigateToAlertPage();
         await alertsPage.navigateToFrames();
         expect(await framesPage.verifyFramesPage()).toContain(data['frames page']);
 
         const frame1Text = await framesPage.switchToFrame1();
         expect(await frame1Text).toBe('This is a sample page');
+    })
+
+    test('@secondFrame - verify the text mentioned in the frame',async({alertsPage,framesPage})=>{
+        await alertsPage.navigateToAlertPage();
+        await alertsPage.navigateToFrames();
+        expect(await framesPage.verifyFramesPage()).toContain(data['frames page']);
+
+        const frame2Text = await framesPage.switchToFrame2();
+        expect(await frame2Text).toBe('This is a sample page');
     })
 
 })
