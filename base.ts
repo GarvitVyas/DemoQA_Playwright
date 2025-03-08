@@ -15,11 +15,13 @@ import { BrowserWindows } from './pages/Alerts_Page/BrowserWindowsPage/browserWi
 import { Alerts } from './pages/Alerts_Page/AlertsPage/alerts_page';
 import { Frames } from './pages/Alerts_Page/FramesPage/frame_page';
 import { NestedFrames } from './pages/Alerts_Page/NesterFramesPage/nestedFrames_page';
+import { ModalDialogs } from './pages/Alerts_Page/ModalDialogsPage/modalDialogs_page';
 
 type myfixture={
     elementPage:Element;
     formsPage:Forms;
     framesPage:Frames;
+    modalDialog:ModalDialogs;
     practiceFormPage:PracticeForm;
     dynamicPropertiesPage:DynamicProperties;
     uploadDownloadPage:UploadDownload;
@@ -39,6 +41,10 @@ export const test = base.extend<myfixture>({
     elementPage: async({page},use)=>{
         const elementPage = new Element(page);
         use(elementPage);
+    },
+    modalDialog:async({page},use)=>{
+        const modalDialog = new ModalDialogs(page);
+        use(modalDialog);
     },
     nestedFrames:async({page},use)=>{
         const nestedFrames = new NestedFrames(page);
