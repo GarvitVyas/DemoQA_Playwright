@@ -16,10 +16,12 @@ import { Alerts } from './pages/Alerts_Page/AlertsPage/alerts_page';
 import { Frames } from './pages/Alerts_Page/FramesPage/frame_page';
 import { NestedFrames } from './pages/Alerts_Page/NesterFramesPage/nestedFrames_page';
 import { ModalDialogs } from './pages/Alerts_Page/ModalDialogsPage/modalDialogs_page';
+import { Widgets } from './pages/Widgets_Page/navigate_to_widgets';
 
 type myfixture={
     elementPage:Element;
     formsPage:Forms;
+    widgetsPage:Widgets;
     framesPage:Frames;
     modalDialog:ModalDialogs;
     practiceFormPage:PracticeForm;
@@ -41,6 +43,10 @@ export const test = base.extend<myfixture>({
     elementPage: async({page},use)=>{
         const elementPage = new Element(page);
         use(elementPage);
+    },
+    widgetsPage:async({page},use)=>{
+        const widgetsPage = new Widgets(page);
+        use(widgetsPage);
     },
     modalDialog:async({page},use)=>{
         const modalDialog = new ModalDialogs(page);
