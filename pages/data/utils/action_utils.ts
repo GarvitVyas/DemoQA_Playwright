@@ -66,6 +66,12 @@ class ElementActions{
         return `${day} ${month} ${year}`;
     }
 
+    async returnText(locator:Locator):Promise<string>{
+        await locator.waitFor({state:'visible'});
+        const text = await locator.innerText();
+        return text;
+    }
+
 }
 
 export{ElementActions};
