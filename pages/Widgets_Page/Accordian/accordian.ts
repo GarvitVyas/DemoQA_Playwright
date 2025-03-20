@@ -12,9 +12,11 @@ class Accordian{
     private thirdheading:string;
     private firstcontent:string;
     private firstheading:string;
+    private showAccordian:string;
     constructor(page:Page) {
         this.page = page;
         this.elementActions = new ElementActions;
+        this.showAccordian='//*[@class="card"]/div[2]';
         this.firstcontent='//div[@class="card"][1]//p';
         this.thirdaccordian='//div[@class="card"][3]';
         this.firstheading='//*[@id="section1Heading"]';
@@ -37,6 +39,10 @@ class Accordian{
         }else if(value === 'third'){
             return await this.elementActions.returnText(await this.page.locator(this.thirdheading));
         }
+    }
+
+    async returnState(){
+        return await this.page.locator(this.showAccordian).first().getAttribute('class');
     }
     
 
