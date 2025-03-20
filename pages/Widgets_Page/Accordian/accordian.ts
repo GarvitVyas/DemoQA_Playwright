@@ -42,7 +42,17 @@ class Accordian{
     }
 
     async returnState(){
-        return await this.page.locator(this.showAccordian).first().getAttribute('class');
+        return new Promise<{c1:string|null,c2:string|null,c3:string|null}>(async(resolve,reject)=>{
+            try{
+                const c1 = await this.page.locator(this.showAccordian).first().getAttribute('class');
+                const c2 = await this.page.locator(this.showAccordian).nth(1).getAttribute('class');
+                const c3 = await this.page.locator(this.showAccordian).nth(2).getAttribute('class');
+                resolve({c1,c2,c3});
+            }catch(err){
+                reject(err);
+            }
+        })
+        //return await this.page.locator(this.showAccordian).first().getAttribute('class');
     }
     
 
