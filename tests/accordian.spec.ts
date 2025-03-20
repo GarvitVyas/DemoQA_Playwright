@@ -16,7 +16,8 @@ test.describe('@accordian - verify the accordian functionality',()=>{
         await widgetsPage.navigateToAccordian();
         expect(await accordianPage.verifyAccordian()).toContain(data['accordian page']);
         expect(await accordianPage.verifyAccordianText('first')).toBe(data['first accordian heading']);
-        
+        const collapse = await accordianPage.returnState();
+        expect(collapse).toBe('collapse show');
     })
 
 })
