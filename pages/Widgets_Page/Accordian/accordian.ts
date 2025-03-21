@@ -42,17 +42,26 @@ class Accordian{
     }
 
     async returnState(){
-        return new Promise<{c1:string|null,c2:string|null,c3:string|null}>(async(resolve,reject)=>{
+        return new Promise<{accordian1:string|null,accordian2:string|null,accordian3:string|null}>(async(resolve,reject)=>{
             try{
-                const c1 = await this.page.locator(this.showAccordian).first().getAttribute('class');
-                const c2 = await this.page.locator(this.showAccordian).nth(1).getAttribute('class');
-                const c3 = await this.page.locator(this.showAccordian).nth(2).getAttribute('class');
-                resolve({c1,c2,c3});
+                const accordian1 = await this.page.locator(this.showAccordian).first().getAttribute('class');
+                const accordian2 = await this.page.locator(this.showAccordian).nth(1).getAttribute('class');
+                const accordian3 = await this.page.locator(this.showAccordian).nth(2).getAttribute('class');
+                resolve({accordian1,accordian2,accordian3});
             }catch(err){
                 reject(err);
             }
         })
-        //return await this.page.locator(this.showAccordian).first().getAttribute('class');
+    }
+
+    async closeOpenAccordian(value:'first'|'second'|'third'){
+        if(value === 'first'){
+            await this.page.locator(this.firstheading).click();
+        }else if(value == 'second'){
+            await this.page.locator(this.secondaccordian).click();
+        }else if(value === 'third'){
+            await this.page.locator(this.thirdaccordian).click();
+        }
     }
     
 
