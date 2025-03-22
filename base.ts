@@ -18,11 +18,13 @@ import { NestedFrames } from './pages/Alerts_Page/NesterFramesPage/nestedFrames_
 import { ModalDialogs } from './pages/Alerts_Page/ModalDialogsPage/modalDialogs_page';
 import { Widgets } from './pages/Widgets_Page/navigate_to_widgets';
 import { Accordian } from './pages/Widgets_Page/Accordian/accordian';
+import { AutoComplete } from './pages/Widgets_Page/AutoComplete/autoComplete';
 type myfixture={
     elementPage:Element;
     formsPage:Forms;
     widgetsPage:Widgets;
     accordianPage:Accordian;
+    autocompletePage:AutoComplete;
     framesPage:Frames;
     modalDialog:ModalDialogs;
     practiceFormPage:PracticeForm;
@@ -44,6 +46,10 @@ export const test = base.extend<myfixture>({
     elementPage: async({page},use)=>{
         const elementPage = new Element(page);
         use(elementPage);
+    },
+    autocompletePage:async({page},use)=>{
+        const autocompletePage = new AutoComplete(page);
+        use(autocompletePage);
     },
     accordianPage:async({page},use)=>{
         const accordianPage = new Accordian(page);
