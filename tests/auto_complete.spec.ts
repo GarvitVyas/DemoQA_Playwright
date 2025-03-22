@@ -31,5 +31,22 @@ test.describe('@autoComplete - verify the auto complete page functionality',()=>
         await autocompletePage.clearAll();
     })
 
+    test('@secondAutoComplete - verify the second auto complete field',async({widgetsPage,autocompletePage})=>{
+        await widgetsPage.naivigateToWidgetsPage();
+        await widgetsPage.navigateToAutoComplete();
+        expect(await autocompletePage.verifyAutoCompletePage()).toContain(data['auto compete']);
+
+        const heading = await autocompletePage.fieldHeadings();
+        expect(heading[1]).toBe(data['heading two']);
+
+        await autocompletePage.singleInputField('r');
+        const value = await autocompletePage.verifySingleInputField();
+        expect(value).toBe('Purple');
+
+        await autocompletePage.singleInputField('t');
+        const new_value = await autocompletePage.verifySingleInputField();
+        expect(new_value).toBe('White');
+    })
+
 
 })
