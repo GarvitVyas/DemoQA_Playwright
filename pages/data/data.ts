@@ -32,7 +32,10 @@ const data={
     'accordian page':'accordian',
     'first accordian heading':'What is Lorem Ipsum?',
     'second accordian heading':'Where does it come from?',
-    'third accordian heading':'Why do we use it?'
+    'third accordian heading':'Why do we use it?',
+    'auto compete':'auto-complete',
+    'heading one':'Type multiple color names',
+    'heading two':'Type single color name'
 };
 
 const staticUser={
