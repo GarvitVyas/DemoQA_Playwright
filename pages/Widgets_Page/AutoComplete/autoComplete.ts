@@ -11,6 +11,8 @@ class AutoComplete{
     private multiplevalue:string;
     private clearsingle : string;
     private clearall:string;
+    private singleinput:string;
+    private singlevalue:string;
 
     constructor(page:Page){
         this.page = page;
@@ -20,7 +22,9 @@ class AutoComplete{
         this.firstHeading='//*[@id="autoCompleteMultiple"]/span';
         this.secondHeading='//*[@id="autoCompleteSingle"]/span';
         this.multipleinput='//*[@id="autoCompleteMultipleInput"]';
-        this.clearsingle='//div[contains(@class,"multi-value__remove")]'
+        this.clearsingle='//div[contains(@class,"multi-value__remove")]';
+        this.singleinput='//*[@id="autoCompleteSingleInput"]';
+        this.singlevalue='//*[contains(@class,"css-1uccc91-singleValue")]'
     }
 
     async verifyAutoCompletePage():Promise<string>{
@@ -38,6 +42,24 @@ class AutoComplete{
         await this.page.getByText('Green').click();
         await this.page.locator(this.multipleinput).fill('r')
         await this.page.getByText('Red').click();
+    }
+
+    async singleInputField(val:string)
+    {  if(val=='r'){
+            await this.page.locator(this.singleinput).fill(val);
+            await this.page.getByText('Purple').click();
+        }else if(val == 't'){
+            await this.page.locator(this.singleinput).fill(val);
+            await this.page.getByText('White').click();
+        }
+    }
+
+    async verifySingleInputField()
+    {
+        const flag = await this.page.locator(this.singlevalue).isVisible();
+        if(flag){
+            return await this.page.locator(this.singlevalue).textContent();   
+            }
     }
 
     async verifyMultipleInputField(){
