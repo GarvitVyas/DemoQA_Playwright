@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "This is project to apply playwright learning with typescript language to create a framework for UI automation.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:all":"npx playwright test --config=playwright.config.ts --grep=tests"
+  },
   "author": "Garvit_Vyas",
   "license": "ISC",
   "dependencies": {
