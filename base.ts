@@ -19,6 +19,7 @@ import { ModalDialogs } from './pages/Alerts_Page/ModalDialogsPage/modalDialogs_
 import { Widgets } from './pages/Widgets_Page/navigate_to_widgets';
 import { Accordian } from './pages/Widgets_Page/Accordian/accordian';
 import { AutoComplete } from './pages/Widgets_Page/AutoComplete/autoComplete';
+
 type myfixture={
     elementPage:Element;
     formsPage:Forms;
@@ -44,20 +45,16 @@ type myfixture={
 
 export const test = base.extend<myfixture>({
     elementPage: async({page},use)=>{
-        const elementPage = new Element(page);
-        use(elementPage);
+        await use(new Element(page));
     },
     autocompletePage:async({page},use)=>{
-        const autocompletePage = new AutoComplete(page);
-        use(autocompletePage);
+        await use(new AutoComplete(page));
     },
     accordianPage:async({page},use)=>{
-        const accordianPage = new Accordian(page);
-        use(accordianPage);
+        await use(new Accordian(page))
     },
     widgetsPage:async({page},use)=>{
-        const widgetsPage = new Widgets(page);
-        use(widgetsPage);
+        await use(new Widgets(page));
     },
     modalDialog:async({page},use)=>{
         const modalDialog = new ModalDialogs(page);
@@ -120,8 +117,7 @@ export const test = base.extend<myfixture>({
         use(radiobuttonPage);
     },
     dynamicPropertiesPage:async({page},use)=>{
-        const dynamicPropertiesPage = new DynamicProperties(page);
-        use(dynamicPropertiesPage);
+        await use( new DynamicProperties(page));
     }
 })
 
