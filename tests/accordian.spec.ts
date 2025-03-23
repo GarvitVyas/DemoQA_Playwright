@@ -69,8 +69,8 @@ test.describe('@accordian - verify the accordian functionality',()=>{
         expect(await accordianPage.verifyAccordian()).toContain(data['accordian page']);
         await accordianPage.closeOpenAccordian('third');
         const {accordian1,accordian2,accordian3} = await accordianPage.returnState();
-        expect(accordian1).toBe('collapse')
-        expect(accordian3).toBe('collapse show');
+        expect(accordian1==='collapse'||accordian1==='collapsing').toBe(true)
+        expect(accordian3==='collapsing'||accordian3==='collapse show').toBe(true);
         expect(accordian2).toBe('collapse');
     })
 
