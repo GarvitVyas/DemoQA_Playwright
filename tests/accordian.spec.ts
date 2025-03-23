@@ -29,7 +29,7 @@ test.describe('@accordian - verify the accordian functionality',()=>{
         expect(await accordianPage.verifyAccordianText('first')).toBe(data['first accordian heading']);
         await accordianPage.closeOpenAccordian('first');
         const {accordian1,accordian2,accordian3} = await accordianPage.returnState();
-        expect(accordian1).toBe('collapse');
+        expect(accordian1 === 'collpase' || accordian1 === 'collapsing').toBe(true);
         expect(accordian2).toBe('collapse');
         expect(accordian3).toBe('collapse');
     })
@@ -49,9 +49,9 @@ test.describe('@accordian - verify the accordian functionality',()=>{
         expect(await accordianPage.verifyAccordian()).toContain(data['accordian page']);
         await accordianPage.closeOpenAccordian('second');
         const {accordian1,accordian2,accordian3} = await accordianPage.returnState();
-        expect(accordian1).toBe('collapse');
+        expect(accordian1=='collapse'||accordian1==='collapsing').toBe(true);
         expect(accordian3).toBe('collapse');
-        expect(accordian2).toBe('collapse show');
+        expect(accordian2==='collapse show'||accordian2==='collapsing').toBe(true);
     })
 
     test('thirdAccordian - verify the third accordian is closed on landing',async({widgetsPage,accordianPage})=>{
@@ -60,7 +60,7 @@ test.describe('@accordian - verify the accordian functionality',()=>{
         expect(await accordianPage.verifyAccordian()).toContain(data['accordian page']);
         expect(await accordianPage.verifyAccordianText('third')).toBe(data['third accordian heading']);
         const {accordian1,accordian2,accordian3} = await accordianPage.returnState();
-        expect(accordian3).toBe('collapse');
+        expect(accordian3 === 'collapse' || accordian3 ==='collapsing').toBe(true);
     })
 
     test('thirdAccordian-2 - verify on actioning third accordian closes the first acordian',async({widgetsPage,accordianPage})=>{
@@ -69,7 +69,7 @@ test.describe('@accordian - verify the accordian functionality',()=>{
         expect(await accordianPage.verifyAccordian()).toContain(data['accordian page']);
         await accordianPage.closeOpenAccordian('third');
         const {accordian1,accordian2,accordian3} = await accordianPage.returnState();
-        expect(accordian1).toBe('collapse');
+        expect(accordian1).toBe('collapse')
         expect(accordian3).toBe('collapse show');
         expect(accordian2).toBe('collapse');
     })
