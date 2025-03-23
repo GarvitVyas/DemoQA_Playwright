@@ -1,11 +1,10 @@
-name : Playwright test demoQA
-
- on: 
+name: Playwright test demoQA
+on: 
   push:
     branches:
       - 'main'
 
-  jobs:
+jobs:
     test:
       runs-on: ubuntu-latest
 
