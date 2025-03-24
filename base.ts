@@ -19,10 +19,12 @@ import { ModalDialogs } from './pages/Alerts_Page/ModalDialogsPage/modalDialogs_
 import { Widgets } from './pages/Widgets_Page/navigate_to_widgets';
 import { Accordian } from './pages/Widgets_Page/Accordian/accordian';
 import { AutoComplete } from './pages/Widgets_Page/AutoComplete/autoComplete';
+import { Slider } from './pages/Widgets_Page/Slider/slider';
 
 type myfixture={
     elementPage:Element;
     formsPage:Forms;
+    sliderPage:Slider;
     widgetsPage:Widgets;
     accordianPage:Accordian;
     autocompletePage:AutoComplete;
@@ -49,6 +51,9 @@ export const test = base.extend<myfixture>({
     },
     autocompletePage:async({page},use)=>{
         await use(new AutoComplete(page));
+    },
+    sliderPage:async({page},use)=>{
+        await use(new Slider(page))
     },
     accordianPage:async({page},use)=>{
         await use(new Accordian(page))
