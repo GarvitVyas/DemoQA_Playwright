@@ -35,7 +35,8 @@ const data={
     'third accordian heading':'Why do we use it?',
     'auto compete':'auto-complete',
     'heading one':'Type multiple color names',
-    'heading two':'Type single color name'
+    'heading two':'Type single color name',
+    'slider page':'slider'
 };
 
 const staticUser={
