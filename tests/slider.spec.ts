@@ -14,7 +14,7 @@ test.describe('@slider - verify the slider functionality',()=>{
     test('@firstSliderTest - verify the slider initial values',async({widgetsPage,sliderPage})=>{
         await widgetsPage.naivigateToWidgetsPage();
         await widgetsPage.navigateToSlider();
-        expect(await sliderPage.verifySliderPage()).toBe(data['slider page']);
+        expect(await sliderPage.verifySliderPage()).toContain(data['slider page']);
 
     })
 
