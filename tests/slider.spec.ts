@@ -17,6 +17,9 @@ test.describe('@slider - verify the slider functionality',()=>{
         expect(await sliderPage.verifySliderPage()).toContain(data['slider page']);
         expect(await sliderPage.sliderValue()).toBe('25');
         expect(await sliderPage.hoverOverSlider()).toBeTruthy();
+
+        await sliderPage.moveSlider();
+        expect(await sliderPage.sliderValue()).toBe('50');
     })
 
 
