@@ -36,7 +36,8 @@ const data={
     'auto compete':'auto-complete',
     'heading one':'Type multiple color names',
     'heading two':'Type single color name',
-    'slider page':'slider'
+    'slider page':'slider',
+    'progress bar':'progress-bar'
 };
 
 const staticUser={
