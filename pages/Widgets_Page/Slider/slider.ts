@@ -60,6 +60,18 @@ class Slider{
         }
     }
 
+    async moveTo100(){
+        const slider = await this.page.locator(this.inputrange);
+        const box = await slider.boundingBox();
+        if(box){
+            const x = box.x + box.width/2;
+            const y= box.y + box.height/2;
+            await this.page.mouse.move(x,y);
+            await this.page.mouse.down();
+            await this.page.mouse.move(x+210,box.y)
+            await this.page.mouse.up();
+        }
+    }
 
 }export{Slider}
 
