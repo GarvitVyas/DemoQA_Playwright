@@ -20,10 +20,12 @@ import { Widgets } from './pages/Widgets_Page/navigate_to_widgets';
 import { Accordian } from './pages/Widgets_Page/Accordian/accordian';
 import { AutoComplete } from './pages/Widgets_Page/AutoComplete/autoComplete';
 import { Slider } from './pages/Widgets_Page/Slider/slider';
+import { ProgressBar } from './pages/Widgets_Page/ProgressBar/progressbar';
 
 type myfixture={
     elementPage:Element;
     formsPage:Forms;
+    progressbarPage:ProgressBar;
     sliderPage:Slider;
     widgetsPage:Widgets;
     accordianPage:Accordian;
@@ -48,6 +50,9 @@ type myfixture={
 export const test = base.extend<myfixture>({
     elementPage: async({page},use)=>{
         await use(new Element(page));
+    },
+    progressbarPage:async({page},use)=>{
+        await use(new ProgressBar(page));
     },
     autocompletePage:async({page},use)=>{
         await use(new AutoComplete(page));
