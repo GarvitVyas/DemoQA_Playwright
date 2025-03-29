@@ -22,13 +22,16 @@ test.describe('@slider - verify the slider functionality',()=>{
         expect(await sliderPage.sliderValue()).toBe('50');
     })
 
-    test('@firstSliderMoveTo100 - move the slider to 100 and move back to 0',async({widgetsPage,sliderPage})=>{
+    test('@firstSliderMoveTo100 - move the slider to 0 and move back to 100',async({widgetsPage,sliderPage})=>{
         await widgetsPage.naivigateToWidgetsPage();
         await widgetsPage.navigateToSlider();
         expect(await sliderPage.verifySliderPage()).toContain(data['slider page']);
 
         await sliderPage.moveSliderFull();
         expect(await sliderPage.sliderValue()).toBe('0');
+
+        await sliderPage.moveTo100();
+        expect(await sliderPage.sliderValue()).toBe('100');
     })
 
 
