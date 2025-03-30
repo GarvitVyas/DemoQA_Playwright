@@ -37,7 +37,8 @@ const data={
     'heading one':'Type multiple color names',
     'heading two':'Type single color name',
     'slider page':'slider',
-    'progress bar':'progress-bar'
+    'progress bar':'progress-bar',
+    'tool tip page':'tool-tips'
 };
 
 const staticUser={
